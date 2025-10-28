@@ -5,3 +5,5 @@ bin/
 *.out
 *.a
 *.o
+*.ppm
+miniRT
