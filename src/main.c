@@ -6,44 +6,59 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/10/28 19:10:20 by mring            ###   ########.fr       */
+/*   Updated: 2025/10/30 22:20:32 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	main(void)
+void	window_loop(void)
 {
-	int		width;
-	int		height;
-	int		i;
-	int		j;
-	double	r;
-	double	g;
-	double	b;
-	int		ir;
-	int		ig;
-	int		ib;
+	mlx_t		*window;
+	mlx_image_t	*img;
+	int			i;
+	int			j;
+	double		r;
+	double		g;
+	int			ir;
+	int			ig;
+	uint32_t	index;
 
-	width = 256;
-	height = 256;
-	printf("P3\n%d %d\n255\n", width, height);
-	i = 0;
-	while (i < height)
+	window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
+	if (!window)
+		exit(1);
+	img = mlx_new_image(window, WIDTH, HEIGHT);
+	if (!img)
 	{
-		fprintf(stderr, "\rScanlines remaining: %d\n", height - i);
+		mlx_terminate(window);
+		exit(1);
+	}
+	i = 0;
+	while (i < HEIGHT)
+	{
 		j = 0;
-		while (j < width)
+		while (j < WIDTH)
 		{
-			r = (double)j / (height - 1);
-			g = (double)i / (width - 1);
-			b = 0.0;
-			ir = (int)255.999 * r;
-			ig = (int)255.999 * g;
-			ib = (int)255.999 * b;
-			printf("%d %d %d\n", ir, ig, ib);
+			r = (double)j / (WIDTH - 1);
+			g = (double)i / (HEIGHT - 1);
+			ir = (int)(255.999 * r);
+			ig = (int)(255.999 * g);
+			index = (i * WIDTH + j) * 4;
+			img->pixels[index + 0] = ir;
+			img->pixels[index + 1] = ig;
+			img->pixels[index + 2] = 0;
+			img->pixels[index + 3] = 255;
 			j++;
 		}
 		i++;
 	}
+	mlx_image_to_window(window, img, 0, 0);
+	mlx_loop(window);
+	mlx_delete_image(window, img);
+	mlx_terminate(window);
+}
+
+int	main(void)
+{
+	window_loop();
 }
