@@ -6,7 +6,13 @@
 /*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/03 17:22:01 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:33:00 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "miniRT.h"
+
+void    parsing_scene(const char    *flie, t_rt *rt)
+{
+
+}

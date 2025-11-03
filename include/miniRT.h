@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/10/30 22:15:54 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/03 18:59:11 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
+# include "parsing.h" 
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 
-# define WIDTH 860
-# define HEIGHT 640
+
 
 typedef struct s_vec3
 {
