@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/03 15:04:49 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/03 16:40:16 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
