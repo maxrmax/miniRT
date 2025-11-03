@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/03 15:04:49 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/03 16:48:53 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 HEADERS = include/miniRT.h
 
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBS = -lmath
 
 # ─────────────────────────────────────────────── #
 #                 PURPLE GRADIENT BANNER           #
@@ -79,7 +78,7 @@ export BANNER
 #                     TARGETS                     #
 # ─────────────────────────────────────────────── #
 
-all: banner $(LIBFT) $(TARGET)
+all: $(LIBFT) $(TARGET) banner
 
 banner:
 	@printf "\n$$BANNER\n\n"

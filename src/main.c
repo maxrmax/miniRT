@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/10/30 22:20:32 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/03 17:49:49 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,16 @@ void	window_loop(void)
 	mlx_terminate(window);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	window_loop();
+	if(ac != 2)
+	{
+		printf("No file or to many arguments");
+		return(1);
+	}
+	else
+	{
+		window_loop();
+	}
+
 }
