@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/10/27 15:10:56 by mring            ###   ########.fr        #
+#    Updated: 2025/11/03 14:59:26 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,30 @@ HEADERS = include/miniRT.h
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBS = -lmath
 
-all: $(LIBFT) $(TARGET)
+# ─────────────────────────────────────────────── #
+#                 PURPLE GRADIENT BANNER           #
+# ─────────────────────────────────────────────── #
+
+define BANNER
+\033[38;2;170;0;255m ██████   ██████ █████ ██████   █████ █████    ███████████   ███████████\033[0m
+\033[38;2;155;0;255m▒▒██████ ██████ ▒▒███ ▒▒██████ ▒▒███ ▒▒███    ▒▒███▒▒▒▒▒███ ▒█▒▒▒███▒▒▒█\033[0m
+\033[38;2;140;0;255m ▒███▒█████▒███  ▒███  ▒███▒███ ▒███  ▒███     ▒███    ▒███ ▒   ▒███  ▒ \033[0m
+\033[38;2;125;0;255m ▒███▒▒███ ▒███  ▒███  ▒███▒▒███▒███  ▒███     ▒██████████      ▒███   \033[0m
+\033[38;2;110;0;255m ▒███ ▒▒▒  ▒███  ▒███  ▒███ ▒▒██████  ▒███     ▒███▒▒▒▒▒███     ▒███   \033[0m
+\033[38;2;95;0;255m ▒███      ▒███  ▒███  ▒███  ▒▒█████  ▒███     ▒███    ▒███     ▒███   \033[0m
+\033[38;2;80;0;255m █████     █████ █████ █████ ▒▒█████  █████    █████   █████    █████  \033[0m
+\033[38;2;65;0;255m▒▒▒▒▒     ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒    ▒▒▒▒▒ ▒▒▒▒▒    ▒▒▒▒▒   ▒▒▒▒▒    ▒▒▒▒▒   \033[0m
+endef
+export BANNER
+
+# ─────────────────────────────────────────────── #
+#                     TARGETS                     #
+# ─────────────────────────────────────────────── #
+
+all: banner $(LIBFT) $(TARGET)
+
+banner:
+	@printf "\n$$BANNER\n\n"
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: fclean all
@@ -68,22 +91,18 @@ valgrind: $(TARGET)
 	@printf "$(CYAN)Running $(NAME) with valgrind...$(RESET)\n"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=sub.sub ./$(TARGET)
 
-# Clean object files
 clean:
 	@printf "$(YELLOW)Cleaning object files...$(RESET)\n"
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 	@printf "$(GREEN)Object files cleaned!$(RESET)\n"
 
-# Clean everything
 fclean:
 	@printf "$(YELLOW)Cleaning everything...$(RESET)\n"
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 	@printf "$(GREEN)Everything cleaned!$(RESET)\n"
 
-# Rebuild everything
 re: fclean all
 
-# Phony targets
-.PHONY: all debug clean fclean re valgrind noflags
+.PHONY: all debug clean fclean re valgrind noflags banner
