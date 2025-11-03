@@ -6,15 +6,30 @@
 #    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/03 14:59:26 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/03 15:04:49 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -lm
+CFLAGS = -Wall -Werror -Wextra
 DEBUG_FLAGS = -fsanitize=address -g3
-INCLUDES = -Iinclude -I$(LIBFT_DIR)
+INCLUDES = -Iinclude -I$(LIBFT_DIR) -I$(MLX_DIR)/include
+LIBS = -lm -lglfw -ldl -pthread
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX_DIR = MLX42
+MLX = $(MLX_DIR)/build/libmlx42.a
+HEADERS = include/miniRT.h 
+
+TARGET = $(NAME)
+SRC_DIR = src
+OBJ_DIR = obj
+SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
+
+SRC_FILES = main.c 
 
 # Colors for output
 RED			= \033[0;31m
@@ -68,23 +83,37 @@ all: banner $(LIBFT) $(TARGET)
 
 banner:
 	@printf "\n$$BANNER\n\n"
+all: $(MLX) $(LIBFT) $(TARGET)
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: fclean all
 
-noflags: CFLAGSL =
+noflags: CFLAGS =
 noflags: fclean all
 
+$(MLX):
+	@printf "$(CYAN)Building MLX42...$(RESET)\n"
+	@cmake $(MLX_DIR) -B $(MLX_DIR)/build 2>&1 | grep -v "^--" || true
+	@+$(MAKE) -C $(MLX_DIR)/build -j4 --no-print-directory
+	@printf "$(GREEN)MLX42 built successfully!$(RESET)\n"
+
 $(LIBFT):
-	@rm -rf libft/.git
+	@printf "$(CYAN)Building libft...$(RESET)\n"
+	@+$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@printf "$(GREEN)Libft built successfully!$(RESET)\n"
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
 	@printf "$(BLUE)Compiling $(YELLOW)$<$(RESET)... "
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@printf "$(GREEN)✓$(RESET)\n"
 
-$(TARGET): $(OBJ) $(LIBFT)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(TARGET): $(OBJ) $(LIBFT) $(MLX)
 	@printf "$(MAGENTA)Linking $(NAME)...$(RESET)\n"
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT) $(LIBS)
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT) $(MLX) $(LIBS)
 	@printf "$(GREEN)$(BOLD)✓ $(NAME) built successfully!$(RESET)\n"
 
 valgrind: $(TARGET)
@@ -95,14 +124,17 @@ clean:
 	@printf "$(YELLOW)Cleaning object files...$(RESET)\n"
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
+	@rm -rf $(MLX_DIR)/build
 	@printf "$(GREEN)Object files cleaned!$(RESET)\n"
 
 fclean:
-	@printf "$(YELLOW)Cleaning everything...$(RESET)\n"
-	@rm -rf $(OBJ_DIR)
+	@printf "$(YELLOW)Cleaning executables...$(RESET)\n"
+	@rm -rf $(OBJ_DIR) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
+	@rm -rf $(MLX_DIR)/build
 	@printf "$(GREEN)Everything cleaned!$(RESET)\n"
 
 re: fclean all
 
 .PHONY: all debug clean fclean re valgrind noflags banner
+
