@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/03 17:49:49 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:18:37 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,19 @@ void	window_loop(void)
 
 int	main(int ac, char **av)
 {
+	t_rt	scene;
+	
 	if(ac != 2)
 	{
-		printf("No file or to many arguments");
+		printf("No file or to many arguments \n");
 		return(1);
 	}
 	else
 	{
+		if(parsing_scene(av[1], scene))
+		{
+			return (1);
+		}
 		window_loop();
 	}
 

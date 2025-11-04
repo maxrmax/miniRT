@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/03 20:14:30 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:21:00 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 # define PARSING_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "miniRT.h"
+
 
 # define WIDTH 860
 # define HEIGHT 640
 
+typedef struct s_vec3
+{
+	double	e[3];
+}			t_vec3;
 typedef struct s_color
 {
 	float	r;
@@ -41,8 +47,8 @@ typedef struct s_camera
 typedef struct s_light
 {
     t_color color;
+    t_vec3  pos;
     float   brightness;
-    t_color color;
 }   t_light;
 
 typedef struct s_sp
@@ -76,8 +82,9 @@ typedef struct s_rt
     t_sp        sphere;
     t_pl        palne;
     t_cy        cylinder;
+    int         count;
 }  t_rt;
 
-
+int    parsing_scene(char *av, t_rt scene);
 
 # endif

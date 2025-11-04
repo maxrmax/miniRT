@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/03 16:48:53 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/04 14:43:53 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ LIBFT_DIR = libft
 
 TARGET = $(NAME)
 
-SRC_FILES = main.c 
+SRC_FILES = main.c \
+			parsing/parsing.c \
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
