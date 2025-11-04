@@ -6,33 +6,11 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/03 21:07:54 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/04 17:55:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-static inline t_vec3	vec3_zero(void)
-{
-	return (vec3_init(0.0, 0.0, 0.0));
-}
-
-static inline double	vec3_length_squared(const t_vec3 *v)
-{
-	return (v->e[0] * v->e[0] + v->e[1] * v->e[1] + v->e[2] * v->e[2]);
-}
-
-static inline double	vec3_length(const t_vec3 *v)
-{
-	return (sqrt(vec3_length_squared(v)));
-}
-
-static inline t_vec3	vec3_add(const t_vec3 *u, const t_vec3 *v)
-{
-	// return (vec3_init(u->e[0] + v->e[0], u->e[1] + v->e[1], u->e[2]
-	// + v->e[2]));
-	return ((t_vec3){.e = {u->e[0], u->e[1], u->e[2]}});
-}
 
 void	window_loop(void)
 {
