@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/04 19:44:32 by mring            ###   ########.fr        #
+#    Updated: 2025/11/05 12:33:44 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ OBJ_DIR = obj
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
-SRC_FILES = main.c 
+SRC_FILES = main.c \
+			src/math/vec3.c \
+			src/parsing/parsing.c
 
 # Colors for output
 RED			= \033[0;31m

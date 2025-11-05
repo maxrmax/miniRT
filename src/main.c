@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/04 19:44:07 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/05 12:34:08 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	window_loop(void)
 	img = mlx_new_image(window, WIDTH, HEIGHT);
 	if (!img)
 	{
-		lock mlx_terminate(window);
+		mlx_terminate(window);
 		exit(1);
 	}
 	i = 0;
