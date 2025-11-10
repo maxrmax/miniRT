@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   vec3_scale.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 17:17:43 by mring            ###   ########.fr       */
+/*   Created: 2025/11/10 16:39:45 by mring             #+#    #+#             */
+/*   Updated: 2025/11/10 16:43:50 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "miniRT.h"
 
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "libft.h"
-# include "parsing.h"
-# include "vec3.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+// scale vector v by number k
+t_vec3	vec_scale(t_vec3 v, double scalar)
+{
+	v.x *= scalar;
+	v.y *= scalar;
+	v.z *= scalar;
+	return (v);
+}
 
-#endif
+// alternative way to write it with a temporary struct
+// compound literal
+// return ((t_vec3){v.x * scalar, v.y * scalar, v.z * scalar});
