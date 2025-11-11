@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/06 13:46:30 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 05:48:13 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ void	window_loop(void)
 int	main(int ac, char **av)
 {
 	t_rt	scene;
-	
-	if(ac != 2)
+
+	if (ac != 2)
 	{
 		printf("No file or to many arguments \n");
-		return(1);
+		return (1);
 	}
 	else
 	{
-		if(parsing_scene(av[1], scene))
+		if (parsing_scene(av[1], scene))
 		{
 			printf("Error: Failed to parse scene\n");
 			return (1);
@@ -77,5 +77,4 @@ int	main(int ac, char **av)
 		window_loop();
 		
 	}
-
 }

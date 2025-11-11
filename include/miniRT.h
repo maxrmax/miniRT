@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/06 13:44:13 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 05:47:54 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
-# include "parsing.h" 
+# include "parsing.h"
+# include "vec3.h"
+# include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
