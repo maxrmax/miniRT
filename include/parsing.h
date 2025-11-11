@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 15:01:29 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/11 16:48:07 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ typedef struct s_rt
 
 int				parsing_scene(char *av, t_rt scene);
 
-void	ft_free_split(char **arr);
+void	        ft_free_split(char **arr);
 
 # endif
