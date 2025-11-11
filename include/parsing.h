@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 16:48:07 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:38:24 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 typedef struct s_color
 {
-	float	r;
-	float	g;
-	float	b;
+	int	r;
+	int	g;
+	int	b;
 }			t_color;
 
 typedef struct s_ambient
@@ -37,7 +37,7 @@ typedef struct s_camera
 {
     t_vec3  pos;
     t_vec3  dir;
-    float   fov;
+    int		fov;
 }   t_camera;
 
 typedef struct s_light
@@ -72,17 +72,31 @@ typedef struct s_cy
 
 typedef struct s_rt
 {
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		light;
-	t_sp		sphere;
-	t_pl		palne;
-	t_cy		cylinder;
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_sp		*sphere;
+	t_pl		*palne;
+	t_cy		*cylinder;
 	int			count;
 }				t_rt;
 
-int				parsing_scene(char *av, t_rt scene);
+int				parsing_scene(char *av, t_rt *scene);
+
+int 			pars_int(char *input);
+
+int 			parse_ratio(char *ratio, float *r);
+
+int 			parse_field_of_view(char *fov_str, t_camera *camera);
+
+int				parse_dir(char *dir, t_vec3 *vec);
+
+int 			parse_color(char *color, t_color *rgb);
+
+int 			parse_cordinates(char *cordi, t_vec3 *vec);
 
 void	        ft_free_split(char **arr);
+
+
 
 # endif
