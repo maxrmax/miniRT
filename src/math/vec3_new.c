@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.c                                             :+:      :+:    :+:   */
+/*   vec3_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 17:53:44 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 17:39:41 by mring            ###   ########.fr       */
+/*   Created: 2025/11/11 14:00:40 by mring             #+#    #+#             */
+/*   Updated: 2025/11/11 14:01:37 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+t_vec3 vec_new(float x, float y, float z)
+{
+	t_vec3 new_vec;
 
-
-/*
-need a brdf function for light refraction on surfaces and color calculation
-Bi-Directional Reflectance Distribution Function
-the function calculates the color the ray will have after in bounces off a surface/intersects with any object
-which can happen multiple times.
-the more rays the more calculation the more calls the slower the program -> here we can optimize with logic
-
-
-*/
+	new_vec.x = x;
+	new_vec.y = y;
+	new_vec.z = z;
+	return (new_vec);
+}

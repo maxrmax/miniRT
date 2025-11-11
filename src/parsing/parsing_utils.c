@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 05:38:09 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:03:07 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int pars_ratio(char *ratio, float *r)
     num = ft_atof(ratio);
     if(num < 0 || num > 1)
     {
-        printf("%d should be between 0.0 or 1.0", num);
+        printf("%f should be between 0.0 or 1.0", num);
         return(0);
     }
     return(num);

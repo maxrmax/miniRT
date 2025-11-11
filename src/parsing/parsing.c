@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 05:48:49 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:10:23 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ int	parsing_scene(char *av, t_rt scene)
 	}
 	// if(check_scenen_arguments(scene))
 	//     return(printf("faild: something is wrong with the file"), 1);
+	return (1);
 }
