@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 18:49:29 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:00:18 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ int	main(int ac, char **av)
 			free(scene);
 			return (1);
 		}
+if (!validate_scene(scene))
+{
+    printf("Scene validation failed. Cannot render.\n");
+    return 1;
+}
+else
+{
+    printf("Scene is valid! Ready to render.\n");
+}
 	window_loop();
 	free(scene);
 	return (0);

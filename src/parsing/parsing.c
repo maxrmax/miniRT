@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 18:50:12 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 19:01:54 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	check_line(char **line, t_rt *scene)
 		return (parse_light(line, scene));
 	if (ft_strcmp(line[0], "sp") == 0)
 		return (parse_sphere(line, scene));
+	if (ft_strcmp(line[0], "pl"))
+		return();//TODO
 	return (printf("Unknown element: %s\n", line[0]), 0);
 }
 

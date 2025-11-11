@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 14:07:36 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/11 18:57:38 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define HEIGHT 640
 
 char **ft_split_whitespace(char *str);
+
+int validate_scene(t_rt *scene);
 
 
 #endif
