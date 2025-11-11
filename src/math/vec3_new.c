@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_scale.c                                       :+:      :+:    :+:   */
+/*   vec3_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:39:45 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 16:43:50 by mring            ###   ########.fr       */
+/*   Created: 2025/11/11 14:00:40 by mring             #+#    #+#             */
+/*   Updated: 2025/11/11 14:01:37 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-// scale vector v by number k
-t_vec3	vec_scale(t_vec3 v, double scalar)
+t_vec3 vec_new(float x, float y, float z)
 {
-	v.x *= scalar;
-	v.y *= scalar;
-	v.z *= scalar;
-	return (v);
-}
+	t_vec3 new_vec;
 
-// alternative way to write it with a temporary struct
-// compound literal
-// return ((t_vec3){v.x * scalar, v.y * scalar, v.z * scalar});
+	new_vec.x = x;
+	new_vec.y = y;
+	new_vec.z = z;
+	return (new_vec);
+}

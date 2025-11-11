@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/05 12:34:49 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/11 15:05:42 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 # define WIDTH 860
 # define HEIGHT 640
 
-typedef t_vec3	t_color;
+typedef struct s_color
+{
+	float	r;
+	float	g;
+	float	b;
+}			t_color;
 
 typedef struct s_ambient
 {
