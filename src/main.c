@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/04 15:18:37 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:46:30 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ int	main(int ac, char **av)
 	{
 		if(parsing_scene(av[1], scene))
 		{
+			printf("Error: Failed to parse scene\n");
 			return (1);
 		}
 		window_loop();
+		
 	}
 
 }

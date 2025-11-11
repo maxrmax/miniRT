@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/04 15:21:00 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/11 05:09:37 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "miniRT.h"
 
-
-# define WIDTH 860
-# define HEIGHT 640
 
 typedef struct s_vec3
 {
@@ -41,7 +38,7 @@ typedef struct s_camera
 {
     t_vec3  pos;
     t_vec3  dir;
-    float   FOV;
+    float   fov;
 }   t_camera;
 
 typedef struct s_light
@@ -86,5 +83,7 @@ typedef struct s_rt
 }  t_rt;
 
 int    parsing_scene(char *av, t_rt scene);
+
+void	ft_free_split(char **arr);
 
 # endif

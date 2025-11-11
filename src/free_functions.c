@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/06 13:44:13 by jpflegha         ###   ########.fr       */
+/*   Created: 2025/11/11 05:08:14 by jpflegha          #+#    #+#             */
+/*   Updated: 2025/11/11 05:09:00 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "miniRT.h"
 
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "libft.h"
-# include "parsing.h" 
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-
-# define WIDTH 860
-# define HEIGHT 640
-
-typedef struct s_vec3
+void	ft_free_split(char **arr)
 {
-	double	e[3];
-}			t_vec3;
+	int	i;
 
-char **ft_split_whitespace(char *str);
-
-
-#endif
+	if (!arr)
+		return;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
