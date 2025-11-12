@@ -60,9 +60,9 @@ int validate_scene(t_rt *scene)
         }
     }
 
-    if (scene->palne)
+    if (scene->plane)
     {
-        if (scene->palne->normal.x == 0 && scene->palne->normal.y == 0 && scene->palne->normal.z == 0)
+        if (scene->plane->normal.x == 0 && scene->plane->normal.y == 0 && scene->plane->normal.z == 0)
         {
             printf("Error: plane normal cannot be zero vector\n");
             return 0;
@@ -71,7 +71,7 @@ int validate_scene(t_rt *scene)
 
     if (scene->cylinder)
     {
-        if (scene->cylinder->diameter <= 0 || scene->cylinder->hight <= 0)
+        if (scene->cylinder->diameter <= 0 || scene->cylinder->height <= 0)
         {
             printf("Error: cylinder size must be > 0\n");
             return 0;

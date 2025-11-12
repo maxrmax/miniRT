@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 19:01:54 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/12 00:57:00 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	parse_ambient(char **line, t_rt *scene);
 int	parse_camera(char **line, t_rt *scene);
 int	parse_light(char **line, t_rt *scene);
 int	parse_sphere(char **line, t_rt *scene);
+int	parse_plane(char **line, t_rt *scene);
+int	parse_cylinder(char **line, t_rt *scene);
 
 int	check_rt_extension(char *filename)
 {
@@ -41,10 +43,41 @@ int	check_line(char **line, t_rt *scene)
 		return (parse_light(line, scene));
 	if (ft_strcmp(line[0], "sp") == 0)
 		return (parse_sphere(line, scene));
-	if (ft_strcmp(line[0], "pl"))
-		return();//TODO
+	if (ft_strcmp(line[0], "pl") == 0)
+		return(parse_plane(line, scene));
+	if (ft_strcmp(line[0], "cy") == 0)
+		return(parse_cylinder(line, scene));
 	return (printf("Unknown element: %s\n", line[0]), 0);
 }
+
+int	parse_plane(char **line, t_rt *scene)
+{
+	if (!scene->plane)
+			scene->plane = malloc(sizeof(t_pl));
+		if (!scene->plane)
+			return (printf("Error: malloc failed for plane\n"), 0);
+		if (!parse_cordinates(line[1], &scene->plane->point)
+			|| !parse_dir(line[2], &scene->plane->normal)
+			|| !parse_color(line[3], &scene->plane->color))
+			return (0);
+		return (1);
+}
+
+int	parse_cylinder(char **line, t_rt *scene)
+{
+	if (!scene->cylinder)
+		scene->cylinder = malloc(sizeof(t_cy));
+	if (!scene->cylinder)
+		return (printf("Error: malloc failed for cylinder\n"), 0);
+	if (!parse_cordinates(line[1], &scene->cylinder->center)
+		|| !parse_dir(line[2], &scene->cylinder->axis)
+		|| !parse_float(line[3], &scene->cylinder->diameter)
+		|| !parse_float(line[4], &scene->cylinder->height)
+		|| !parse_color(line[5], &scene->cylinder->color))
+			return (0);
+		return (1);
+	}
+
 
 int	parse_ambient(char **line, t_rt *scene)
 {
@@ -52,7 +85,7 @@ int	parse_ambient(char **line, t_rt *scene)
 		scene->ambient = malloc(sizeof(t_ambient));
 	if (!scene->ambient)
 		return (printf("Error: malloc failed for ambient\n"), 0);
-	if (!parse_ratio(line[1], &scene->ambient->ratio)
+	if (!parse_ratio(line[1], &scene->ambient->ratio, 1)
 		|| !parse_color(line[2], &scene->ambient->color))
 		return (0);
 	return (1);
@@ -78,7 +111,7 @@ int	parse_light(char **line, t_rt *scene)
 	if (!scene->light)
 		return (printf("Error: malloc failed for light\n"), 0);
 	if (!parse_cordinates(line[1], &scene->light->pos)
-		|| !parse_ratio(line[2], &scene->light->brightness)
+		|| !parse_ratio(line[2], &scene->light->brightness, 0)
 		|| !parse_color(line[3], &scene->light->color))
 		return (0);
 	return (1);
@@ -91,7 +124,7 @@ int	parse_sphere(char **line, t_rt *scene)
 	if (!scene->sphere)
 		return (printf("Error: malloc failed for sphere\n"), 0);
 	if (!parse_cordinates(line[1], &scene->sphere->center)
-		|| !parse_ratio(line[2], &scene->sphere->diameter)
+		|| !parse_ratio(line[2], &scene->sphere->diameter, 0)
 		|| !parse_color(line[3], &scene->sphere->color))
 		return (0);
 	return (1);

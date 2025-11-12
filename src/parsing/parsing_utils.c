@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 18:42:16 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/12 00:57:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int pars_int(char *input)
 /// @param ratio 
 /// @param r 
 /// @return 
-int parse_ratio(char *ratio, float *r)
+int parse_ratio(char *ratio, float *r, int check_range)
 {
     float num;
 
@@ -45,8 +45,8 @@ int parse_ratio(char *ratio, float *r)
     if (!ft_isfloat(ratio))
         return (printf("Invalid float: %s\n", ratio), 0);
     num = ft_atof(ratio);
-    if (num < 0.0f || num > 1.0f)
-        return (printf("%f should be between 0.0 and 1.0\n", num), 0);
+    if (check_range && (num < 0.0f || num > 1.0f))
+        return (printf("%f %s should be between 0.0 and 1.0\n", num, ratio), 0);
     *r = num;
     return (1);
 }
@@ -136,4 +136,18 @@ int parse_cordinates(char *cordi, t_vec3 *vec)
     vec->z = ft_atof(split[2]);
     ft_free_split(split);
     return (1);
+}
+int	parse_float(char *str, float *f)
+{
+	float	num;
+
+	if (!str || !f)
+		return (0);
+	if (!ft_isfloat(str))
+		return (printf("Invalid float: %s\n", str), 0);
+	num = ft_atof(str);
+	if (num < 0.0f)
+		return (printf("Value must be positive: %f\n", num), 0);
+	*f = num;
+	return (1);
 }
