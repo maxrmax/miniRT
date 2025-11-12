@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/05 12:33:44 by mring            ###   ########.fr        #
+#    Updated: 2025/11/11 18:58:34 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,11 @@ LIBFT_DIR = libft
 TARGET = $(NAME)
 
 SRC_FILES = main.c \
-			parsing/parsing.c
+			free_functions.c \
+			parsing/parsing.c \
+			parsing/parsing_utils.c \
+			parsing/ft_split_whitespace.c \
+			DEBUGG.c
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

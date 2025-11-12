@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/05 12:43:35 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/11 19:00:18 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,34 @@ void	window_loop(void)
 
 int	main(int ac, char **av)
 {
-	t_rt	scene;
+	t_rt	*scene;
 
+	scene = malloc(sizeof(t_rt));
+	if (!scene)
+		return (printf("Error: malloc failed\n"), 1);
+	ft_memset(scene, 0, sizeof(t_rt));
 	if (ac != 2)
 	{
 		printf("No file or to many arguments \n");
+		free(scene);
 		return (1);
 	}
-	else
-	{
-		if (parsing_scene(av[1], scene))
+	if (parsing_scene(av[1], scene))
 		{
+			printf("Error: Failed to parse scene\n");
+			free(scene);
 			return (1);
 		}
-		window_loop();
-	}
+if (!validate_scene(scene))
+{
+    printf("Scene validation failed. Cannot render.\n");
+    return 1;
+}
+else
+{
+    printf("Scene is valid! Ready to render.\n");
+}
+	window_loop();
+	free(scene);
+	return (0);
 }
