@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/12 00:57:00 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:42:13 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int	check_line(char **line, t_rt *scene)
 		return (parse_camera(line, scene));
 	if (ft_strcmp(line[0], "L") == 0)
 		return (parse_light(line, scene));
+	// objects below this can be multiple
+	// need to allocate an array of objects for this
+	// t_sp **sphere, t_pl **plane, t_cy **cylinger
+	// TODO:
 	if (ft_strcmp(line[0], "sp") == 0)
 		return (parse_sphere(line, scene));
 	if (ft_strcmp(line[0], "pl") == 0)

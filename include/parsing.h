@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/12 14:36:48 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/13 19:39:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ int 			parse_cordinates(char *cordi, t_vec3 *vec);
 
 int				parse_float(char *str, float *f);
 
-void	        ft_free_split(char **arr);
+void			ft_free_split(char **arr);
+
+void			free_scenes(t_rt *scene);
 
 
 

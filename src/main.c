@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 19:00:18 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:42:23 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	window_loop(void)
+void	window_loop_test(void)
 {
 	mlx_t		*window;
 	mlx_image_t	*img;
@@ -58,36 +58,43 @@ void	window_loop(void)
 	mlx_terminate(window);
 }
 
+void	window_loop(t_rt *scene)
+{
+	// with vector and matrix set the prop into position.
+	/*
+	detect object type
+	draw_scene(scene); // figure out the types we have.
+	if 
+	if (scene->)
+	*/
+	vec_new(x, y, z);
+}
+
 int	main(int ac, char **av)
 {
 	t_rt	*scene;
 
+	
+	if (ac != 2)
+	return (printf("No file or to many arguments \n"), 1);
 	scene = malloc(sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
-	ft_memset(scene, 0, sizeof(t_rt));
-	if (ac != 2)
-	{
-		printf("No file or to many arguments \n");
-		free(scene);
-		return (1);
-	}
+	// warum? brauchen doch nicht memory zu nullen
+	// ft_memset(scene, 0, sizeof(t_rt));
 	if (parsing_scene(av[1], scene))
-		{
-			printf("Error: Failed to parse scene\n");
-			free(scene);
-			return (1);
-		}
-if (!validate_scene(scene))
-{
-    printf("Scene validation failed. Cannot render.\n");
-    return 1;
-}
-else
-{
-    printf("Scene is valid! Ready to render.\n");
-}
-	window_loop();
-	free(scene);
+	{
+		printf("Error: Failed to parse scene\n");
+		return (free_scenes(scene), 1);
+	}
+	if (!validate_scene(scene))
+	{
+		printf("Scene validation failed. Cannot render.\n");
+		return (free_scenes(scene), 1);
+	}
+	else
+		printf("Scene is valid! Ready to render.\n");
+	window_loop(scene);
+	free_scenes(scene);
 	return (0);
 }
