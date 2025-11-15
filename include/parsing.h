@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/13 19:39:48 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/15 15:44:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,14 @@ typedef struct s_rt
 }				t_rt;
 
 int				parsing_scene(char *av, t_rt *scene);
-
 int 			pars_int(char *input);
-
 int 			parse_ratio(char *ratio, float *r, int check_range);
-
 int 			parse_field_of_view(char *fov_str, t_camera *camera);
-
 int				parse_dir(char *dir, t_vec3 *vec);
-
 int 			parse_color(char *color, t_color *rgb);
-
 int 			parse_cordinates(char *cordi, t_vec3 *vec);
-
 int				parse_float(char *str, float *f);
-
 void			ft_free_split(char **arr);
-
 void			free_scenes(t_rt *scene);
 
 

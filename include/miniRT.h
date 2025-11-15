@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 18:57:38 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:00:32 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define WIDTH 860
 # define HEIGHT 640
 
+// drawing objects and scene
+void draw_elements(t_rt *scenes);
+void object_drawing(t_rt *scenes);
+int draw_scene(t_rt *scenes);
+
+// 
 char **ft_split_whitespace(char *str);
 
 int validate_scene(t_rt *scene);

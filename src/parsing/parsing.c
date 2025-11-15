@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/13 20:42:13 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/15 14:20:41 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ int	check_line(char **line, t_rt *scene)
 	if (ft_strcmp(line[0], "A") == 0)
 		return (parse_ambient(line, scene));
 	if (ft_strcmp(line[0], "C") == 0)
-		return (parse_camera(line, scene));
+		return (scene->count++, parse_camera(line, scene));
 	if (ft_strcmp(line[0], "L") == 0)
-		return (parse_light(line, scene));
+		return (scene->count++, parse_light(line, scene));
 	// objects below this can be multiple
 	// need to allocate an array of objects for this
 	// t_sp **sphere, t_pl **plane, t_cy **cylinger
 	// TODO:
 	if (ft_strcmp(line[0], "sp") == 0)
-		return (parse_sphere(line, scene));
+		return (scene->count++, parse_sphere(line, scene));
 	if (ft_strcmp(line[0], "pl") == 0)
-		return(parse_plane(line, scene));
+		return(scene->count++, parse_plane(line, scene));
 	if (ft_strcmp(line[0], "cy") == 0)
-		return(parse_cylinder(line, scene));
+		return(scene->count++, parse_cylinder(line, scene));
 	return (printf("Unknown element: %s\n", line[0]), 0);
 }
 
