@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:45:28 by mring             #+#    #+#             */
-/*   Updated: 2025/11/15 16:00:49 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/17 13:16:53 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void draw_elements(t_rt *scenes)
 {
 	// ambient has no pos, its deciding color and ratio
+	// think about its implementation
 	if (scenes->camera)
 		vec_new(scenes->camera->pos.x, 
 			scenes->camera->pos.y, scenes->camera->pos.z);
 	if (scenes->light)
 		vec_new(scenes->light->pos.x, 
 			scenes->light->pos.y, scenes->light->pos.z);
+	// am i missing anything?
+	// matrixes?
+	// TODO: research
 }
 
 void object_drawing(t_rt *scenes)
@@ -34,8 +38,8 @@ void object_drawing(t_rt *scenes)
 	{
 		// sphere has vec3 center, float diameter,
 		// how to place it?
-		// if (scenes->sphere[i])
-			// draw_sphere(scenes->sphere[i]);
+		if (scenes->sphere) //[i])
+			draw_sphere(scenes->sphere); //[i]);
 		// plane has a vec3 point, a normal, and color
 		// if (scenes->plane[i])
 			// draw_plane(scenes->plane[i]);
@@ -44,6 +48,9 @@ void object_drawing(t_rt *scenes)
 			// draw_cylinder(scenes->cylinder[i]);
 		i++;
 	}
+	// same here, anything missing?
+	// TODO: learn how to apply matrix.
+	// TODO: research
 }
 
 int draw_scene(t_rt *scenes)

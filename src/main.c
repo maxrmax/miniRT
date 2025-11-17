@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/15 15:47:41 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/17 14:10:12 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	window_loop_test(void)
 		{
 			r = (double)j / (WIDTH - 1);
 			g = (double)i / (HEIGHT - 1);
-			ir = (int)(255.999 * r);
+			ir = (int)(255.999 * r) ;
 			ig = (int)(255.999 * g);
 			index = (i * WIDTH + j) * 4;
 			img->pixels[index + 0] = ir;
@@ -63,7 +63,7 @@ void	window_loop(t_rt *scene)
 	/*
 	now with scene prepped:
 	the camera looks into a certain direction.
-	lets say 800x600.
+	lets say 1280x720 (16:9).
 	for each pixel we send out a single ray.
 	if that ray hits an object:
 	is it blocked by another object or has it a clear path to the light source?

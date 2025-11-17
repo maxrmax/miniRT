@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/15 15:44:02 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/17 13:21:17 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include "miniRT.h"
 # include "vec3.h"
 
-# define WIDTH 860
-# define HEIGHT 640
 
 typedef struct s_color
 {
@@ -72,6 +70,16 @@ typedef struct s_cy
 
 typedef struct s_rt
 {
+	// maybe need to adjust struct to account
+	// for iterating:
+	// first: spheres, planes and cylinders can
+	// appear multiple times
+	// need an array!
+	// second, don't want to access memory out of bounds
+	// need proper logic for implementation of the array
+	// for proper access logic operations.
+	// TODO: implement array, improve struct
+	// counter per object additionally to count of total objects?
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
