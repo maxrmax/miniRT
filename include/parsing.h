@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/12 00:56:42 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:07:02 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ typedef struct s_cy
 	t_color		color;
 }				t_cy;
 
+typedef struct s_couter
+{
+	int		plane;
+	int		cylinder;
+	int		sphere;
+}				t_counter;
+
 typedef struct s_rt
 {
 	t_ambient	*ambient;
@@ -78,7 +85,7 @@ typedef struct s_rt
 	t_sp		*sphere;
 	t_pl		*plane;
 	t_cy		*cylinder;
-	int			count;
+	t_counter		*counter;
 }				t_rt;
 
 int				parsing_scene(char *av, t_rt *scene);

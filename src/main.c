@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 19:00:18 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:11:28 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 	scene = malloc(sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
-	ft_memset(scene, 0, sizeof(t_rt));
+	
 	if (ac != 2)
 	{
 		printf("No file or to many arguments \n");

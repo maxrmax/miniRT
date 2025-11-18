@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/12 00:57:27 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:04:10 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int pars_int(char *input)
     int i = 0;
 
     if (!input || !*input)
-        return (0);
+        return (printf("Input is missing\n"), 0);
     if (input[i] == '-' || input[i] == '+')
         i++;
     while (input[i])
@@ -41,7 +41,7 @@ int parse_ratio(char *ratio, float *r, int check_range)
     float num;
 
     if (!ratio || !r)
-        return (0);
+        return (printf("Input is missing\n"), 0);
     if (!ft_isfloat(ratio))
         return (printf("Invalid float: %s\n", ratio), 0);
     num = ft_atof(ratio);
@@ -60,7 +60,7 @@ int parse_field_of_view(char *fov_str, t_camera *camera)
     int fov;
 
     if (!fov_str || !camera)
-        return (0);
+        return (printf("Input is missing\n"), 0);
     if (!pars_int(fov_str))
         return (0);
     fov = ft_atoi(fov_str);
@@ -92,7 +92,7 @@ int parse_color(char *color, t_color *rgb)
     int count;
 
     if (!color || !rgb)
-        return (0);
+        return (printf("Input is missing\n"), 0);
     split = ft_split(color, ',');
     if (!split)
         return (0);
@@ -119,7 +119,7 @@ int parse_cordinates(char *cordi, t_vec3 *vec)
     int count;
 
     if (!cordi || !vec)
-        return (0);
+        return (printf("Input is missing\n"), 0);
     split = ft_split(cordi, ',');
     if (!split)
         return (0);
@@ -142,7 +142,7 @@ int	parse_float(char *str, float *f)
 	float	num;
 
 	if (!str || !f)
-		return (0);
+		return (printf("Input is missing\n"), 0);
 	if (!ft_isfloat(str))
 		return (printf("Invalid float: %s\n", str), 0);
 	num = ft_atof(str);
