@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/19 01:24:49 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/19 16:55:58 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ SRC_FILES = main.c \
 			math/vec3_sub.c \
 			logic/draw_scene.c \
 			parsing/parsing.c \
+			parsing/helper_functions.c \
 			parsing/parsing_utils.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
-			DEBUGG.c
 
 
 # Colors for output
@@ -72,6 +72,8 @@ SRC_FILES = main.c \
 			parsing/parsing.c \
 			parsing/parsing_utils.c \
 			parsing/ft_split_whitespace.c \
+			parsing/helper_functions.c \
+
 
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

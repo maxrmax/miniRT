@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/19 01:26:18 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:15:40 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ int	check_rt_extension(char *filename)
 {
 	int	len;
 
+	if (!filename)
+        return (printf("Error: filename is NULL\n"), 1);
 	len = ft_strlen(filename);
 	if (len < 4 || ft_strcmp(filename + len - 3, ".rt") != 0)
-		return (printf("Wrong file typ\n"), 1);
+		return (printf("Error: Wrong file type (expected .rt)\n"), 1);
 	return (0);
 }
 
@@ -86,6 +88,11 @@ int	parse_ambient(char **line, t_rt *scene)
 {
 	if (!scene->ambient)
 	{
+		if(!line[1] || !line[2])
+		{
+			printf("Something went wrong!!!\n");
+			return (0);
+		}
 		scene->ambient = malloc(sizeof(t_ambient));
 		if (!scene->ambient)
 			return (printf("Error: malloc failed for ambient\n"), 0);
@@ -145,26 +152,28 @@ int	parse_sphere(char **line, t_rt *scene)
 	t_obj_data sphere;
 
 	if (!parse_cordinates(line[1], &sphere.sp.center)
-		|| !parse_ratio(line[2], &sphere.sp.diameter, 0)
+		|| !parse_float(line[2], &sphere.sp.diameter)
 		|| !parse_color(line[3], &sphere.sp.color))
 		return (0);
 	add_obj(scene, SPHERE, sphere);
 	return (1);
 }
 
-void	add_obj(t_rt *rt, t_obj_type type, t_obj_data data)
+void	add_obj(t_rt *scene, t_obj_type type, t_obj_data data)
 {
 	t_obj	*new_obj;
 
 	new_obj = malloc(sizeof(t_obj));
 	if (!new_obj)
 	{
+		printf("Malloc faild\n");
+		free_scenes(scene);
 		return ;
 	}
 	new_obj->type = type;
 	new_obj->data = data;
-	new_obj->next = rt->objects;
-	rt->objects = new_obj;
+	new_obj->next = scene->objects;
+	scene->objects = new_obj;
 }
 
 int	parsing_scene(char *av, t_rt *scene)
@@ -172,9 +181,9 @@ int	parsing_scene(char *av, t_rt *scene)
 	int		fd;
 	char	*line;
 	char	**split;
-	int		i;
+	int		line_num;
 
-	i = 0;
+	line_num = 0;
 	if (check_rt_extension(av))
 		return (1);
 	fd = open(av, O_RDONLY);
@@ -182,14 +191,18 @@ int	parsing_scene(char *av, t_rt *scene)
 		return (perror("Error opening file"), 1);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		i++;
-		if (line[0] == '\0' || line[0] == '\n' || line[0] == '#') {
+		line_num++;
+		if (line[0] == '\0' || line[0] == '\n' || line[0] == '#')
+		{
 			free(line);
 			continue;
 		}
 		split = ft_split_whitespace(line);
 		if (!check_line(split, scene))
-			return (free(line), ft_free_split(split), close(fd), i);
+		{
+			 printf("Error on line %d\n", line_num);
+			 return (free(line), ft_free_split(split), close(fd), 1);
+		}
 		free(line);
 		ft_free_split(split);
 	}

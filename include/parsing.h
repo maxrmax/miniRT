@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/11/19 00:57:44 by jpflegha         ###   ########.fr       */
-=======
-/*   Updated: 2025/11/17 13:21:17 by mring            ###   ########.fr       */
->>>>>>> mring
+/*   Updated: 2025/11/19 16:46:40 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +108,7 @@ typedef struct s_rt
 	t_obj       *objects;
 }				t_rt;
 
+int 			count_array_elements(char **arr);
 int				parsing_scene(char *av, t_rt *scene);
 int 			pars_int(char *input);
 int 			parse_ratio(char *ratio, float *r, int check_range);

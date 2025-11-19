@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/11/19 01:18:26 by jpflegha         ###   ########.fr       */
-=======
-/*   Updated: 2025/11/17 14:10:12 by mring            ###   ########.fr       */
->>>>>>> mring
+/*   Updated: 2025/11/19 17:24:45 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +184,7 @@ final_color = material_color * (direct + material.reflectivity * reflected);
         color += ambient_color * object_color
     
     write_pixel(img, i, j, color)
-
+scene
 	TODO:
 	Phase 1: Get something on screen
 	Parse scene (you have this)
@@ -233,6 +229,32 @@ final_color = material_color * (direct + material.reflectivity * reflected);
 	printf("window_loop (not looping lol)\n");
 	return ;
 }
+int print_obj(t_rt *scene)
+{
+	int i = 0;
+	while (scene->objects)
+	{
+		if (scene->objects->type == SPHERE)
+			write(1, "sphere\n", 8);
+		else if (scene->objects->type == PLANE)
+			printf("PLANE\n");
+		else if (scene->objects->type == CYLINDER)
+			printf("CYLINDER  \n");
+		scene->objects = scene->objects->next;
+	}
+	return(i);
+}
+
+int validate_scene(t_rt *scene)
+{
+    if (!scene->ambient)
+        return (printf("Error: Missing ambient light\n"), 0);
+    if (!scene->camera)
+        return (printf("Error: Missing camera\n"), 0);
+    if (!scene->light)
+        return (printf("Error: Missing light\n"), 0);
+    return (1);
+}
 
 int	main(int ac, char **av)
 {
@@ -247,44 +269,22 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		printf("No file or to many arguments \n");
-		free(scene);
+		free_scenes(scene);
 		return (1);
 	}
 	i = parsing_scene(av[1], scene);
 	if (i > 0)
 		{
 			printf("Error: Failed to parse scene\n line %d in the file\n", i);
-			free(scene);
+			free_scenes(scene);
 			return (1);
 		}
-	else
+	i = print_obj(scene);
+	printf("%d", i);
+	if(validate_scene(scene))
 	{
-	window_loop();
-	free(scene);
-	
-	if (ac != 2)
-	return (printf("No file or to many arguments \n"), 1);
-	scene = malloc(sizeof(t_rt));
-	if (!scene)
-		return (printf("Error: malloc failed\n"), 1);
-	// warum? brauchen doch nicht memory zu nullen
-	// ft_memset(scene, 0, sizeof(t_rt));
-	if (parsing_scene(av[1], scene))
-	{
-		printf("Error 1: Failed to parse scene\n");
-		return (free_scenes(scene), 1);
+		window_loop_test();
 	}
-	if (!validate_scene(scene))
-	{
-		printf("Error 2: Scene validation failed. Cannot render.\n");
-		return (free_scenes(scene), 1);
-	}
-	else
-		printf("Scene is valid! Ready to render.\n");
-	// if (draw_scene(scene) == -1)
-		// printf("Error 3: Failed to draw scene.\n");
-	window_loop(scene);
 	free_scenes(scene);
 	return (0);
-	}
 }
