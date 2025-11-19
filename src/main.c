@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/17 14:10:12 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/19 14:23:44 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	window_loop_test(void)
 		{
 			r = (double)j / (WIDTH - 1);
 			g = (double)i / (HEIGHT - 1);
-			ir = (int)(255.999 * r) ;
+			ir = (int)(255.999 * r);
 			ig = (int)(255.999 * g);
 			index = (i * WIDTH + j) * 4;
 			img->pixels[index + 0] = ir;
@@ -60,6 +60,12 @@ void	window_loop_test(void)
 
 void	window_loop(t_rt *scene)
 {
+	mlx_t		*window;
+	mlx_image_t	*img;
+	t_vec3		camera_pos;
+	t_ray		ray;
+	t_color		color;
+
 	/*
 	now with scene prepped:
 	the camera looks into a certain direction.
@@ -69,29 +75,24 @@ void	window_loop(t_rt *scene)
 	is it blocked by another object or has it a clear path to the light source?
 	yes (clear path): get the color and brightness
 	no (blocked path): shadowed... get paths to different objects until light source?
-	
 	// shadow checking =//= ray bouncing
-	
 	conceptually:
 	void window_loop(t_rt *scene)
 {
-    mlx_t *window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
-    mlx_image_t *img = mlx_new_image(window, WIDTH, HEIGHT);
-    
-    // Hardcoded for now (later use scene->camera)
-    t_vec3 camera_pos = vec_new(0, 0, 0);
-    
-    for (int j = 0; j < HEIGHT; j++) {
-        for (int i = 0; i < WIDTH; i++) {
-            t_ray ray = get_camera_ray(i, j, camera_pos);
-            t_color color = ray_color(ray, scene);
-            write_color(img, i, j, color);
-        }
-    }
-    
-    mlx_image_to_window(window, img, 0, 0);
-    mlx_loop(window);
-    // cleanup...
+	window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
+	img = mlx_new_image(window, WIDTH, HEIGHT);
+	// Hardcoded for now (later use scene->camera)
+	camera_pos = vec_new(0, 0, 0);
+	for (int j = 0; j < HEIGHT; j++) {
+		for (int i = 0; i < WIDTH; i++) {
+			ray = get_camera_ray(i, j, camera_pos);
+			color = ray_color(ray, scene);
+			write_color(img, i, j, color);
+		}
+	}
+	mlx_image_to_window(window, img, 0, 0);
+	mlx_loop(window);
+	// cleanup...
 }
 
 // ----
@@ -101,19 +102,19 @@ Your scenario: Camera → Plane → Sphere1 → Sphere2 → Sphere3 → Sphere4 
 Call Stack (depth = 5):
 1. ray_color(camera_ray, depth=5)
    ↓ Hits plane
-   
+
 2. ray_color(reflected_off_plane, depth=4)
    ↓ Hits Sphere1
-   
+
 3. ray_color(reflected_off_sphere1, depth=3)
    ↓ Hits Sphere2
-   
+
 4. ray_color(reflected_off_sphere2, depth=2)
    ↓ Hits Sphere3
-   
+
 5. ray_color(reflected_off_sphere3, depth=1)
    ↓ Hits Sphere4
-   
+
 6. ray_color(reflected_off_sphere4, depth=0)
    ↓ depth limit reached, return BLACK
    (or check direct light)
@@ -123,16 +124,20 @@ Unwinding (backward color calculation):
    6. Sphere4: color = object_color * direct_light + BLACK (no more bounces)
    ↓ return to 5
 
-5. Sphere3: color = object_color * (direct_light + reflectivity * color_from_sphere4)
+5. Sphere3: color = object_color * (direct_light + reflectivity
+		* color_from_sphere4)
    ↓ return to 4
 
-4. Sphere2: color = object_color * (direct_light + reflectivity * color_from_sphere3)
+4. Sphere2: color = object_color * (direct_light + reflectivity
+		* color_from_sphere3)
    ↓ return to 3
 
-3. Sphere1: color = object_color * (direct_light + reflectivity * color_from_sphere2)
+3. Sphere1: color = object_color * (direct_light + reflectivity
+		* color_from_sphere2)
    ↓ return to 2
 
-2. Plane: color = object_color * (direct_light + reflectivity * color_from_sphere1)
+2. Plane: color = object_color * (direct_light + reflectivity
+		* color_from_sphere1)
    ↓ return to 1
 
 1. Final pixel color!
@@ -142,8 +147,8 @@ The math at each bounce:
 direct = 0;		// check type(s) -> if (type) vec_new(x, y, z);
 		// then apply matrix: rotation, color, etc.
 for each light:
-    if (shadow_ray to light is clear):
-        direct += light_contribution(normal, light_direction);
+	if (shadow_ray to light is clear):
+		direct += light_contribution(normal, light_direction);
 
 // Reflected illumination (from other objects via recursion)
 reflected = ray_color(bounce_ray, depth - 1);
@@ -154,36 +159,36 @@ final_color = material_color * (direct + material.reflectivity * reflected);
 
 	/*
 	for each pixel (i, j):
-    // 1. Generate primary ray
-    ray = camera_ray_for_pixel(i, j)
-    
-    // 2. Find closest object hit
-    hit = find_closest_intersection(ray, scene->objects)
-    
-    if (no hit):
-        color = background_color  // Sky
-    else:
-        // 3. Calculate surface properties
-        hit_point = ray_at(ray, hit.distance)
-        normal = calculate_normal(hit_point, hit.object)
-        
-        // 4. Check each light source
-        for each light in scene->lights:
-            // Cast shadow ray
-            shadow_ray = ray_from_to(hit_point, light.position)
-            
-            if (shadow_ray hits another object):
-                // In shadow from this light
-                continue
-            else:
-                // Calculate lighting contribution
-                brightness = dot(normal, light_direction)
-                color += object_color * light_color * brightness
-        
-        // 5. Add ambient light (base illumination)
-        color += ambient_color * object_color
-    
-    write_pixel(img, i, j, color)
+	// 1. Generate primary ray
+	ray = camera_ray_for_pixel(i, j)
+
+	// 2. Find closest object hit
+	hit = find_closest_intersection(ray, scene->objects)
+
+	if (no hit):
+		color = background_color  // Sky
+	else:
+		// 3. Calculate surface properties
+		hit_point = ray_at(ray, hit.distance)
+		normal = calculate_normal(hit_point, hit.object)
+
+		// 4. Check each light source
+		for each light in scene->lights:
+			// Cast shadow ray
+			shadow_ray = ray_from_to(hit_point, light.position)
+
+			if (shadow_ray hits another object):
+				// In shadow from this light
+				continue
+			else:
+				// Calculate lighting contribution
+				brightness = dot(normal, light_direction)
+				color += object_color * light_color * brightness
+
+		// 5. Add ambient light (base illumination)
+		color += ambient_color * object_color
+
+	write_pixel(img, i, j, color)
 
 	TODO:
 	Phase 1: Get something on screen
@@ -206,25 +211,29 @@ final_color = material_color * (direct + material.reflectivity * reflected);
 	next step:
 	void window_loop(t_rt *scene)
 {
-    mlx_t *window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
-    mlx_image_t *img = mlx_new_image(window, WIDTH, HEIGHT);
-    
-    // Hardcoded for now (later use scene->camera)
-    t_vec3 camera_pos = vec_new(0, 0, 0);
-    
-    for (int j = 0; j < HEIGHT; j++) {
-        for (int i = 0; i < WIDTH; i++) {
-            t_ray ray = get_camera_ray(i, j, camera_pos);
-            t_color color = ray_color(ray, scene);
-            write_color(img, i, j, color);
-        }
-    }
-    
-    mlx_image_to_window(window, img, 0, 0);
-    mlx_loop(window);
-    // cleanup...
+	mlx_t		*window;
+	mlx_image_t	*img;
+	t_vec3		camera_pos;
+	t_ray		ray;
+	t_color		color;
+
+	window = mlx_init(WIDTH, HEIGHT, "miniRT", false);
+	img = mlx_new_image(window, WIDTH, HEIGHT);
+	// Hardcoded for now (later use scene->camera)
+	camera_pos = vec_new(0, 0, 0);
+	for (int j = 0; j < HEIGHT; j++) {
+		for (int i = 0; i < WIDTH; i++) {
+			ray = get_camera_ray(i, j, camera_pos);
+			color = ray_color(ray, scene);
+			write_color(img, i, j, color);
+		}
+	}
+	mlx_image_to_window(window, img, 0, 0);
+	mlx_loop(window);
+	// cleanup...
 }
 	*/
+
 	(void)scene;
 	printf("window_loop (not looping lol)\n");
 	return ;
@@ -234,9 +243,8 @@ int	main(int ac, char **av)
 {
 	t_rt	*scene;
 
-	
 	if (ac != 2)
-	return (printf("No file or to many arguments \n"), 1);
+		return (printf("No file or to many arguments \n"), 1);
 	scene = malloc(sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
@@ -255,7 +263,7 @@ int	main(int ac, char **av)
 	else
 		printf("Scene is valid! Ready to render.\n");
 	// if (draw_scene(scene) == -1)
-		// printf("Error 3: Failed to draw scene.\n");
+	// printf("Error 3: Failed to draw scene.\n");
 	window_loop(scene);
 	free_scenes(scene);
 	return (0);
