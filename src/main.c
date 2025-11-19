@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/18 15:11:28 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 01:18:26 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	window_loop(void)
 int	main(int ac, char **av)
 {
 	t_rt	*scene;
+	int		i;
 
+	i = 0;
 	scene = malloc(sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
@@ -72,22 +74,17 @@ int	main(int ac, char **av)
 		free(scene);
 		return (1);
 	}
-	if (parsing_scene(av[1], scene))
+	i = parsing_scene(av[1], scene);
+	if (i > 0)
 		{
-			printf("Error: Failed to parse scene\n");
+			printf("Error: Failed to parse scene\n line %d in the file\n", i);
 			free(scene);
 			return (1);
 		}
-if (!validate_scene(scene))
-{
-    printf("Scene validation failed. Cannot render.\n");
-    return 1;
-}
-else
-{
-    printf("Scene is valid! Ready to render.\n");
-}
+	else
+	{
 	window_loop();
 	free(scene);
 	return (0);
+	}
 }

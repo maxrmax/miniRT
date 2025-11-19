@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/18 15:49:36 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 01:14:05 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	parse_light(char **line, t_rt *scene);
 int	parse_sphere(char **line, t_rt *scene);
 int	parse_plane(char **line, t_rt *scene);
 int	parse_cylinder(char **line, t_rt *scene);
+void	add_obj(t_rt *rt, t_obj_type type, t_obj_data data);
 
 int	check_rt_extension(char *filename)
 {
@@ -52,30 +53,28 @@ int	check_line(char **line, t_rt *scene)
 
 int	parse_plane(char **line, t_rt *scene)
 {
-	if (!scene->plane)
-			scene->plane = malloc(sizeof(t_pl));
-		if (!scene->plane)
-			return (printf("Error: malloc failed for plane\n"), 0);
-		if (!parse_cordinates(line[1], &scene->plane->point)
-			|| !parse_dir(line[2], &scene->plane->normal)
-			|| !parse_color(line[3], &scene->plane->color))
-			return (0);
-		return (1);
+	t_obj_data plane;
+
+	if (!parse_cordinates(line[1], &plane.pl.point)
+		|| !parse_dir(line[2], &plane.pl.normal)
+		|| !parse_color(line[3], &plane.pl.color))
+		return (0);
+	add_obj(scene, PLANE, plane);
+	return (1);
 }
 
 int	parse_cylinder(char **line, t_rt *scene)
 {
-	if (!scene->cylinder)
-		scene->cylinder = malloc(sizeof(t_cy));
-	if (!scene->cylinder)
-		return (printf("Error: malloc failed for cylinder\n"), 0);
-	if (!parse_cordinates(line[1], &scene->cylinder->center)
-		|| !parse_dir(line[2], &scene->cylinder->axis)
-		|| !parse_float(line[3], &scene->cylinder->diameter)
-		|| !parse_float(line[4], &scene->cylinder->height)
-		|| !parse_color(line[5], &scene->cylinder->color))
+	t_obj_data cylinder;
+
+	if (!parse_cordinates(line[1], &cylinder.cy.center)
+		|| !parse_dir(line[2], &cylinder.cy.axis)
+		|| !parse_float(line[3], &cylinder.cy.diameter)
+		|| !parse_float(line[4], &cylinder.cy.height)
+		|| !parse_color(line[5], &cylinder.cy.color))
 			return (0);
-		return (1);
+	add_obj(scene, CYLINDER, cylinder);
+	return (1);
 	}
 
 
@@ -137,27 +136,41 @@ int	parse_light(char **line, t_rt *scene)
 		return(0);
 	}
 }
-
 int	parse_sphere(char **line, t_rt *scene)
 {
-	if (!scene->sphere)
-		scene->sphere = malloc(sizeof(t_sp));
-	if (!scene->sphere)
-		return (printf("Error: malloc failed for sphere\n"), 0);
-	if (!parse_cordinates(line[1], &scene->sphere->center)
-		|| !parse_ratio(line[2], &scene->sphere->diameter, 0)
-		|| !parse_color(line[3], &scene->sphere->color))
+	t_obj_data sphere;
+
+	if (!parse_cordinates(line[1], &sphere.sp.center)
+		|| !parse_ratio(line[2], &sphere.sp.diameter, 0)
+		|| !parse_color(line[3], &sphere.sp.color))
 		return (0);
+	add_obj(scene, SPHERE, sphere);
 	return (1);
 }
 
+void	add_obj(t_rt *rt, t_obj_type type, t_obj_data data)
+{
+	t_obj	*new_obj;
+
+	new_obj = malloc(sizeof(t_obj));
+	if (!new_obj)
+	{
+		return ;
+	}
+	new_obj->type = type;
+	new_obj->data = data;
+	new_obj->next = rt->objects;
+	rt->objects = new_obj;
+}
 
 int	parsing_scene(char *av, t_rt *scene)
 {
 	int		fd;
 	char	*line;
 	char	**split;
+	int		i;
 
+	i = 0;
 	if (check_rt_extension(av))
 		return (1);
 	fd = open(av, O_RDONLY);
@@ -165,11 +178,14 @@ int	parsing_scene(char *av, t_rt *scene)
 		return (perror("Error opening file"), 1);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if(line[0] == '\n' || line[0] == '#')
+		i++;
+		if (line[0] == '\0' || line[0] == '\n' || line[0] == '#') {
+			free(line);
 			continue;
+		}
 		split = ft_split_whitespace(line);
 		if (!check_line(split, scene))
-			return (free(line), ft_free_split(split), close(fd), 1);
+			return (free(line), ft_free_split(split), close(fd), i);
 		free(line);
 		ft_free_split(split);
 	}

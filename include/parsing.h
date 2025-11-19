@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/18 16:07:02 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 00:57:44 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 
 # define WIDTH 860
 # define HEIGHT 640
+
+typedef enum e_obj_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+}	t_obj_type;
 
 typedef struct s_color
 {
@@ -33,9 +40,11 @@ typedef struct s_ambient
 	t_color		color;
 }				t_ambient;
 
+
+
 typedef struct s_camera
 {
-    t_vec3  pos;
+	t_vec3  pos;
     t_vec3  dir;
     int		fov;
 }   t_camera;
@@ -59,7 +68,7 @@ typedef struct s_pl
 	t_vec3		point;
 	t_vec3		normal;
 	t_color		color;
-}				t_pl;
+	}				t_pl;
 
 typedef struct s_cy
 {
@@ -69,26 +78,29 @@ typedef struct s_cy
 	float		height;
 	t_color		color;
 }				t_cy;
-
-typedef struct s_couter
+typedef union u_obj_data
 {
-	int		plane;
-	int		cylinder;
-	int		sphere;
-}				t_counter;
+	t_sp    sp;
+	t_pl    pl;
+	t_cy    cy;
+}	t_obj_data;
+
+typedef struct s_obj
+{
+	t_obj_type      type;
+	t_obj_data      data;
+	struct s_obj   *next;
+}	t_obj;
 
 typedef struct s_rt
 {
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
-	t_sp		*sphere;
-	t_pl		*plane;
-	t_cy		*cylinder;
-	t_counter		*counter;
+	t_obj       *objects;
 }				t_rt;
 
-int				parsing_scene(char *av, t_rt *scene);
+int	parsing_scene(char *av, t_rt *scene);
 
 int 			pars_int(char *input);
 
