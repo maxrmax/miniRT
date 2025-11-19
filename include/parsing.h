@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/19 00:57:44 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:15:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ typedef struct s_rt
 	t_obj       *objects;
 }				t_rt;
 
-int	parsing_scene(char *av, t_rt *scene);
 
+
+int 			count_array_elements(char **arr);
+int				parsing_scene(char *av, t_rt *scene);
 int 			pars_int(char *input);
 
 int 			parse_ratio(char *ratio, float *r, int check_range);
