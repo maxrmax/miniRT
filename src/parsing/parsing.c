@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/19 01:14:05 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 01:26:18 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	check_line(char **line, t_rt *scene)
 		return (parse_camera(line, scene));
 	if (ft_strcmp(line[0], "L") == 0)
 		return (parse_light(line, scene));
+	// objects below this can be multiple
+	// need to allocate an array of objects for this
+	// t_sp **sphere, t_pl **plane, t_cy **cylinger
+	// TODO:
 	if (ft_strcmp(line[0], "sp") == 0)
 		return (parse_sphere(line, scene));
 	if (ft_strcmp(line[0], "pl") == 0)

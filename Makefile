@@ -6,7 +6,7 @@
 #    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/19 01:18:39 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/19 01:24:49 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,25 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
 SRC_FILES = main.c \
-			src/math/vec3.c \
-			src/parsing/parsing.c
+			math/vec3_add.c \
+			math/vec3_cross.c \
+			math/vec3_div.c \
+			math/vec3_dot.c \
+			math/vec3_length.c \
+			math/vec3_mult_vec.c \
+			math/vec3_mult.c \
+			math/vec3_negate.c \
+			math/vec3_new.c \
+			math/vec3_normalize.c \
+			math/vec3_print.c \
+			math/vec3_sub.c \
+			logic/draw_scene.c \
+			parsing/parsing.c \
+			parsing/parsing_utils.c \
+			parsing/ft_split_whitespace.c \
+			free_functions.c \
+			DEBUGG.c
+
 
 # Colors for output
 RED			= \033[0;31m
