@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/11/19 00:57:44 by jpflegha         ###   ########.fr       */
-=======
-/*   Updated: 2025/11/17 13:21:17 by mring            ###   ########.fr       */
->>>>>>> mring
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +17,8 @@
 # include "miniRT.h"
 # include "vec3.h"
 
+# define WIDTH 860
+# define HEIGHT 640
 
 typedef enum e_obj_type
 {
@@ -31,9 +29,9 @@ typedef enum e_obj_type
 
 typedef struct s_color
 {
-	float	r;
-	float	g;
-	float	b;
+	int	r;
+	int	g;
+	int	b;
 }			t_color;
 
 typedef struct s_ambient
@@ -96,32 +94,29 @@ typedef struct s_obj
 
 typedef struct s_rt
 {
-	// maybe need to adjust struct to account
-	// for iterating:
-	// first: spheres, planes and cylinders can
-	// appear multiple times
-	// need an array!
-	// second, don't want to access memory out of bounds
-	// need proper logic for implementation of the array
-	// for proper access logic operations.
-	// TODO: implement array, improve struct
-	// counter per object additionally to count of total objects?
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
 	t_obj       *objects;
 }				t_rt;
 
-int				parsing_scene(char *av, t_rt *scene);
+int	parsing_scene(char *av, t_rt *scene);
+
 int 			pars_int(char *input);
+
 int 			parse_ratio(char *ratio, float *r, int check_range);
+
 int 			parse_field_of_view(char *fov_str, t_camera *camera);
+
 int				parse_dir(char *dir, t_vec3 *vec);
+
 int 			parse_color(char *color, t_color *rgb);
+
 int 			parse_cordinates(char *cordi, t_vec3 *vec);
+
 int				parse_float(char *str, float *f);
-void			ft_free_split(char **arr);
-void			free_scenes(t_rt *scene);
+
+void	        ft_free_split(char **arr);
 
 
 
