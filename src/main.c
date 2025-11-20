@@ -6,13 +6,13 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/19 23:15:43 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:18:30 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	window_loop(void)
+void	window_loop_test(void)
 {
 	mlx_t		*window;
 	mlx_image_t	*img;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jenne <jenne@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/19 23:16:51 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/20 13:48:45 by jenne            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRC_FILES = main.c \
 			math/vec3_normalize.c \
 			math/vec3_print.c \
 			math/vec3_sub.c \
-			logic/draw_scene.c \
 			parsing/parsing.c \
 			parsing/helper_functions.c \
 			parsing/parsing_utils.c \
@@ -61,23 +60,6 @@ WHITE		= \033[0;37m
 RESET		= \033[0m
 BOLD		= \033[1m
 
-SRC_DIR = src
-OBJ_DIR = obj
-LIBFT_DIR = libft
-
-TARGET = $(NAME)
-
-SRC_FILES = main.c \
-			free_functions.c \
-			parsing/parsing.c \
-			parsing/parsing_utils.c \
-			parsing/ft_split_whitespace.c \
-			parsing/helper_functions.c \
-
-
-SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-
-OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
 HEADERS = include/miniRT.h
 

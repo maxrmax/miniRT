@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jenne <jenne@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/19 23:15:27 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:46:27 by jenne            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int 			parse_cordinates(char *cordi, t_vec3 *vec);
 int				parse_float(char *str, float *f);
 
 void	        ft_free_split(char **arr);
+
+void normalize_vector(t_vec3 *vec);
 
 
 

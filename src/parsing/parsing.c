@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/19 23:16:07 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:17:24 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	check_line(char **line, t_rt *scene)
 		return(parse_plane(line, scene));
 	if (ft_strcmp(line[0], "cy") == 0)
 		return(parse_cylinder(line, scene));
-	return (printf("Unknown element: %s\n", line[0]), 0);
+	return(1);
+	// return (printf("Unknown element: %s\n", line[0]), 0);
 }
 
 int	parse_plane(char **line, t_rt *scene)
@@ -98,10 +99,7 @@ int	parse_ambient(char **line, t_rt *scene)
 		return (1);
 	}
 	else
-	{
-		printf("Just one Ambient possible\n");
-		return(0);
-	}
+		return (1);
 }
 
 int	parse_camera(char **line, t_rt *scene)
@@ -118,10 +116,7 @@ int	parse_camera(char **line, t_rt *scene)
 		return (1);
 	}
 	else
-	{
-		printf("Just one Camera possible\n");
-		return(0);
-	}
+		return(1);
 }
 
 int	parse_light(char **line, t_rt *scene)
@@ -132,16 +127,13 @@ int	parse_light(char **line, t_rt *scene)
 		if (!scene->light)
 			return (printf("Error: malloc failed for light\n"), 0);
 		if (!parse_cordinates(line[1], &scene->light->pos)
-			|| !parse_ratio(line[2], &scene->light->brightness, 0)
+			|| !parse_float(line[2], &scene->light->brightness)
 			|| !parse_color(line[3], &scene->light->color))
 			return (0);
 		return (1);
 	}
 	else
-	{
-		printf("Just one light possible\n");
-		return(0);
-	}
+		return(1);
 }
 int	parse_sphere(char **line, t_rt *scene)
 {
@@ -188,11 +180,6 @@ int	parsing_scene(char *av, t_rt *scene)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		line_num++;
-		if (line[0] == '\0' || line[0] == '\n' || line[0] == '#')
-		{
-			free(line);
-			continue;
-		}
 		split = ft_split_whitespace(line);
 		if (!check_line(split, scene))
 		{
