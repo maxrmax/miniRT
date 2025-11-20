@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/19 23:18:30 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:23:06 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,21 +229,59 @@ scene
 	printf("window_loop (not looping lol)\n");
 	return ;
 }
+#include <stdio.h>
+#include <unistd.h>
+
+void print_vec3(const char *name, t_vec3 v)
+{
+    printf("%s: (%f, %f, %f)\n", name, v.x, v.y, v.z);
+}
+
+void print_color(const char *name, t_color c)
+{
+    printf("%s: (%d, %d, %d)\n", name, c.r, c.g, c.b);
+}
+
 int print_obj(t_rt *scene)
 {
-	int i = 0;
-	while (scene->objects)
-	{
-		if (scene->objects->type == SPHERE)
-			write(1, "sphere\n", 8);
-		else if (scene->objects->type == PLANE)
-			printf("PLANE\n");
-		else if (scene->objects->type == CYLINDER)
-			printf("CYLINDER  \n");
-		scene->objects = scene->objects->next;
-	}
-	return(i);
+    t_obj *current = scene->objects;
+    int i = 0;
+
+    while (current)
+    {
+        printf("Object %d:\n", i);
+
+        if (current->type == SPHERE)
+        {
+            printf("  Type: SPHERE\n");
+            print_color("  Color", current->data.sp.color);
+            print_vec3("  Center", current->data.sp.center);
+            printf("  Diameter: %f\n", current->data.sp.diameter);
+        }
+        else if (current->type == PLANE)
+        {
+            printf("  Type: PLANE\n");
+            print_vec3("  Point", current->data.pl.point);
+            print_vec3("  Normal", current->data.pl.normal);
+            print_color("  Color", current->data.pl.color);
+        }
+        else if (current->type == CYLINDER)
+        {
+            printf("  Type: CYLINDER\n");
+            print_vec3("  Center", current->data.cy.center);
+            print_vec3("  Axis", current->data.cy.axis);
+            printf("  Diameter: %f\n", current->data.cy.diameter);
+            printf("  Height: %f\n", current->data.cy.height);
+            print_color("  Color", current->data.cy.color);
+        }
+
+        printf("\n");
+        current = current->next;
+        i++;
+    }
+    return i;
 }
+
 
 int validate_scene(t_rt *scene)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/20 16:26:50 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:21:01 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int parse_dir(char *dir, t_vec3 *vec)
     
     if (vec->x == 0.0f && vec->y == 0.0f && vec->z == 0.0f)
         return (printf("Direction vector cannot be zero\n"), 0);
-    
-    // Normalize immediately - guaranteed to be normalized
     *vec = vec_normalize(*vec);
     return (1);
 }
