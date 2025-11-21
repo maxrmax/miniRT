@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jenne <jenne@student.42.fr>                +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/20 13:48:45 by jenne            ###   ########.fr        #
+#    Updated: 2025/11/21 17:06:13 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,9 @@ SRC_FILES = main.c \
 			parsing/parsing.c \
 			parsing/helper_functions.c \
 			parsing/parsing_utils.c \
+			parsing/init.c \
+			parsing/parsing_obj.c \
+			parsing/parsing_scene.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
 

@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/21 16:13:42 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/21 16:20:58 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,9 +366,7 @@ int validate_scene(t_rt *scene)
 int	main(int ac, char **av)
 {
 	t_rt	*scene;
-	int		i;
 
-	i = 0;
 	scene = malloc(sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
@@ -379,13 +377,8 @@ int	main(int ac, char **av)
 		free_scenes(scene);
 		return (1);
 	}
-	i = parsing_scene(av[1], scene);
-	if (i > 0)
-		{
-			printf("Error: Failed to parse scene\n line %d in the file\n", i);
-			free_scenes(scene);
-			return (1);
-		}
+	if (parsing_scene(av[1], scene))
+			return (free_scenes(scene), 1);
 	print_scene(scene);
 	if(validate_scene(scene))
 	{
