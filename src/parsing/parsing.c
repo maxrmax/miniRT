@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:21:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/20 16:17:24 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:59:41 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	check_rt_extension(char *filename)
 
 int	check_line(char **line, t_rt *scene)
 {
+	
 	if (!line || !line[0] || !scene)
 		return (0);
 	if (line[0][0] == '\0')
@@ -51,7 +52,6 @@ int	check_line(char **line, t_rt *scene)
 	if (ft_strcmp(line[0], "cy") == 0)
 		return(parse_cylinder(line, scene));
 	return(1);
-	// return (printf("Unknown element: %s\n", line[0]), 0);
 }
 
 int	parse_plane(char **line, t_rt *scene)
@@ -180,6 +180,11 @@ int	parsing_scene(char *av, t_rt *scene)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		line_num++;
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue;
+		}
 		split = ft_split_whitespace(line);
 		if (!check_line(split, scene))
 		{

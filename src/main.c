@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/20 18:23:06 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/21 16:13:42 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,11 +230,12 @@ scene
 	return ;
 }
 #include <stdio.h>
-#include <unistd.h>
+
+/* --- Helpers ------------------------------------------------------------ */
 
 void print_vec3(const char *name, t_vec3 v)
 {
-    printf("%s: (%f, %f, %f)\n", name, v.x, v.y, v.z);
+    printf("%s: (%.1f, %.1f, %.1f)\n", name, v.x, v.y, v.z);
 }
 
 void print_color(const char *name, t_color c)
@@ -242,55 +243,123 @@ void print_color(const char *name, t_color c)
     printf("%s: (%d, %d, %d)\n", name, c.r, c.g, c.b);
 }
 
-int print_obj(t_rt *scene)
+/* --- Ambient ------------------------------------------------------------ */
+
+void print_ambient(t_ambient *a)
 {
-    t_obj *current = scene->objects;
+    if (!a)
+    {
+        printf("Ambient: (null)\n");
+        return;
+    }
+
+    printf("Ambient:\n");
+    printf("  Ratio: %.1f\n", a->ratio);
+    print_color("  Color", a->color);
+    printf("\n");
+}
+
+/* --- Camera ------------------------------------------------------------- */
+
+void print_camera(t_camera *cam)
+{
+    if (!cam)
+    {
+        printf("Camera: (null)\n");
+        return;
+    }
+
+    printf("Camera:\n");
+    print_vec3("  Position", cam->pos);
+    print_vec3("  Direction", cam->dir);
+    printf("  FOV: %d\n\n", cam->fov);
+}
+
+/* --- Light -------------------------------------------------------------- */
+
+void print_light(t_light *l)
+{
+    if (!l)
+    {
+        printf("Light: (null)\n");
+        return;
+    }
+
+    printf("Light:\n");
+    print_color("  Color", l->color);
+    print_vec3("  Position", l->pos);
+    printf("  Brightness: %f\n\n", l->brightness);
+}
+
+/* --- Objects ------------------------------------------------------------ */
+
+void print_objects(t_obj *obj)
+{
     int i = 0;
 
-    while (current)
+    while (obj)
     {
         printf("Object %d:\n", i);
 
-        if (current->type == SPHERE)
+        if (obj->type == SPHERE)
         {
             printf("  Type: SPHERE\n");
-            print_color("  Color", current->data.sp.color);
-            print_vec3("  Center", current->data.sp.center);
-            printf("  Diameter: %f\n", current->data.sp.diameter);
+            print_color("  Color", obj->data.sp.color);
+            print_vec3("  Center", obj->data.sp.center);
+            printf("  Diameter: %f\n", obj->data.sp.diameter);
         }
-        else if (current->type == PLANE)
+        else if (obj->type == PLANE)
         {
             printf("  Type: PLANE\n");
-            print_vec3("  Point", current->data.pl.point);
-            print_vec3("  Normal", current->data.pl.normal);
-            print_color("  Color", current->data.pl.color);
+            print_vec3("  Point", obj->data.pl.point);
+            print_vec3("  Normal", obj->data.pl.normal);
+            print_color("  Color", obj->data.pl.color);
         }
-        else if (current->type == CYLINDER)
+        else if (obj->type == CYLINDER)
         {
             printf("  Type: CYLINDER\n");
-            print_vec3("  Center", current->data.cy.center);
-            print_vec3("  Axis", current->data.cy.axis);
-            printf("  Diameter: %f\n", current->data.cy.diameter);
-            printf("  Height: %f\n", current->data.cy.height);
-            print_color("  Color", current->data.cy.color);
+            print_vec3("  Center", obj->data.cy.center);
+            print_vec3("  Axis", obj->data.cy.axis);
+            printf("  Diameter: %f\n", obj->data.cy.diameter);
+            printf("  Height: %f\n", obj->data.cy.height);
+            print_color("  Color", obj->data.cy.color);
         }
 
         printf("\n");
-        current = current->next;
+        obj = obj->next;
         i++;
     }
-    return i;
 }
+
+/* --- Full Scene Print --------------------------------------------------- */
+
+void print_scene(t_rt *scene)
+{
+    printf("===== SCENE DATA =====\n\n");
+
+    print_ambient(scene->ambient);
+    print_camera(scene->camera);
+    print_light(scene->light);
+    print_objects(scene->objects);
+
+    printf("===== END SCENE =====\n");
+}
+
 
 
 int validate_scene(t_rt *scene)
 {
+    int i;
+
+    i = 0;
     if (!scene->ambient)
-        return (printf("Error: Missing ambient light\n"), 0);
+        i = printf("Error: Missing ambient\n");
     if (!scene->camera)
-        return (printf("Error: Missing camera\n"), 0);
+        i = printf("Error: Missing camera\n");
     if (!scene->light)
-        return (printf("Error: Missing light\n"), 0);
+        i = printf("Error: Missing light\n");
+    if (i > 0)
+        return (0);
     return (1);
 }
 
@@ -317,8 +386,7 @@ int	main(int ac, char **av)
 			free_scenes(scene);
 			return (1);
 		}
-	i = print_obj(scene);
-	printf("%d", i);
+	print_scene(scene);
 	if(validate_scene(scene))
 	{
 		window_loop_test();
