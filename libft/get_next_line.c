@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:42:11 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/03 18:42:32 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:35:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	ft_reset_save(char *save)
 	}
 	return (0);
 }
+
 char	*get_next_line(int fd)
 {
 	static char	save[BUFFER_SIZE + 1];
@@ -82,4 +83,3 @@ char	*get_next_line(int fd)
 	temp = ft_get_line(line);
 	return (ft_reset_save(save), free(line), temp);
 }
-

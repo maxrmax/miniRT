@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:52:59 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 17:32:30 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:34:53 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 /// @brief Converts a string to a floating-point number (double)
 /// The function skips leading whitespace, handles an optional '+' or '-' sign,
 /// and converts both the integer and fractional parts of the number.
-/// It stops parsing when a non-numeric character (other than '.') is encountered.
-/// @param char *str 
+/// It stops parsing when a non-numeric character is encountered.
+/// @param char *str
 /// @return double
 static const char	*skip_whitespace(const char *str)
 {
-	while (*str == ' ' || *str == '\t' || *str == '\n' ||
-		   *str == '\r' || *str == '\f' || *str == '\v')
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\r'
+		|| *str == '\f' || *str == '\v')
 		str++;
 	return (str);
 }
