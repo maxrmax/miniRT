@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 15:34:04 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/24 16:24:29 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,9 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	double			aspect_ratio;
-	int				image_width;
-	int				image_height;
-	t_vec3			center;
-
-	t_vec3			pixel00_loc;
-	t_vec3			pixel_delta_u;
-	t_vec3			pixel_delta_v;
-
-	double			viewport_height;
-	double			viewport_width;
-
-	t_vec3			viewport_u;
-	t_vec3			viewport_v;
-	t_vec3			viewport_upper_left;
+	t_vec3			pos;
+	t_vec3			dir;
+	int				fov;
 }					t_camera;
 
 typedef struct s_light

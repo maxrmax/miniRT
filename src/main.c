@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/24 15:35:18 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/24 17:10:15 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,7 +382,8 @@ int	main(int ac, char **av)
 	print_scene(scene);
 	if (validate_scene(scene))
 	{
-		window_loop_test();
+		simple_render1(scene);
+		// window_loop_test();
 	}
 	free_scenes(scene);
 	return (0);

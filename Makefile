@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/21 17:06:13 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/11/24 17:23:50 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC_FILES = main.c \
 			parsing/parsing_scene.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
+			render.c
 
 
 # Colors for output
