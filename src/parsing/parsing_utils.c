@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 14:33:15 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:42:56 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// @param ratio
 /// @param r
 /// @return
-int	parse_ratio(char *ratio, float *r, int check_range)
+int	parse_ratio(char *ratio, float *r, int check_range)//maybe not needed
 {
 	float	num;
 

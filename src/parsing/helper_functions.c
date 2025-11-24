@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:22:09 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 17:21:53 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:48:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pars_int(char *input)
 	return (1);
 }
 
-int	parse_float(char *str, float *f)
+int	parse_float(char *str, float *f)//maybe not needed
 {
 	float	num;
 
@@ -44,6 +44,21 @@ int	parse_float(char *str, float *f)
 	num = ft_atof(str);
 	if (num < 0.0f)
 		return (printf("Value must be positive: %f\n", num), 0);
+	*f = num;
+	return (1);
+}
+
+int	parse_float_with_range(char *str, float *f, float min, float max)
+{
+	float	num;
+
+	if (!str || !f)
+		return (printf("Input is missing\n"), 0);
+	if (!ft_isfloat(str))
+		return (printf("Invalid float: %s\n", str), 0);
+	num = ft_atof(str);
+	if (num < min || num > max)
+		return (printf("Value %.1f must be between %.1f and %.1f\n", num, min, max), 0);
 	*f = num;
 	return (1);
 }

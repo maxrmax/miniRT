@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 17:03:30 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 17:11:56 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:52:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_ambient(char **line, t_rt *scene)
 		scene->ambient = malloc(sizeof(t_ambient));
 		if (!scene->ambient)
 			return (printf("Error: malloc failed for ambient\n"), 0);
-		if (!parse_ratio(line[1], &scene->ambient->ratio, 1)
+		if (!parse_float_with_range(line[1], &scene->ambient->ratio, 0.0, 1.0)
 			|| !parse_color(line[2], &scene->ambient->color))
 			return (0);
 		return (1);
@@ -58,7 +58,7 @@ int	parse_light(char **line, t_rt *scene)
 		if (!scene->light)
 			return (printf("Error: malloc failed for light\n"), 0);
 		if (!parse_cordinates(line[1], &scene->light->pos)
-			|| !parse_float(line[2], &scene->light->brightness)
+			|| !parse_float_with_range(line[2], &scene->light->brightness, 0.0, 1.0)
 			|| !parse_color(line[3], &scene->light->color))
 			return (0);
 		return (1);

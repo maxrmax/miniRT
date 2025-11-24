@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 17:04:37 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:43:35 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int					parse_dir(char *dir, t_vec3 *vec);
 int					parse_color(char *color, t_color *rgb);
 
 int					parse_cordinates(char *cordi, t_vec3 *vec);
+
+int					parse_float_with_range(char *str, float *f, float min, float max);
 
 int					parse_float(char *str, float *f);
 
