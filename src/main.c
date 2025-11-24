@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/11/21 16:20:58 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:11:36 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,6 @@ scene
 	printf("window_loop (not looping lol)\n");
 	return ;
 }
-#include <stdio.h>
 
 /* --- Helpers ------------------------------------------------------------ */
 
@@ -332,6 +331,7 @@ void print_objects(t_obj *obj)
 }
 
 /* --- Full Scene Print --------------------------------------------------- */
+/* --- Helper End  -------------------------------------------------------- */
 
 void print_scene(t_rt *scene)
 {
@@ -379,7 +379,7 @@ int	main(int ac, char **av)
 	}
 	if (parsing_scene(av[1], scene))
 			return (free_scenes(scene), 1);
-	print_scene(scene);
+	//print_scene(scene);
 	if(validate_scene(scene))
 	{
 		window_loop_test();

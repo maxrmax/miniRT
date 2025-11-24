@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 17:03:30 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 14:52:27 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:52:20 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	parse_light(char **line, t_rt *scene)
 		if (!scene->light)
 			return (printf("Error: malloc failed for light\n"), 0);
 		if (!parse_cordinates(line[1], &scene->light->pos)
-			|| !parse_float_with_range(line[2], &scene->light->brightness, 0.0, 1.0)
-			|| !parse_color(line[3], &scene->light->color))
+			|| !parse_float_with_range(line[2], &scene->light->brightness, 0.0,
+				1.0) || !parse_color(line[3], &scene->light->color))
 			return (0);
 		return (1);
 	}

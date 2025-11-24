@@ -6,28 +6,45 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 14:42:56 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:05:44 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/// @brief function to pars the ratio (0.0 - 1.0)
-/// @param ratio
-/// @param r
-/// @return
-int	parse_ratio(char *ratio, float *r, int check_range)//maybe not needed
+// /// @brief function to pars the ratio (0.0 - 1.0)
+// /// @param ratio
+// /// @param r
+// /// @return
+// int	parse_ratio(char *ratio, float *r, int check_range)//maybe not needed
+// {
+// 	float	num;
+
+// 	if (!ratio || !r)
+// 		return (printf("Input is missing\n"), 0);
+// 	if (!ft_isfloat(ratio))
+// 		return (printf("Invalid float: %s\n", ratio), 0);
+// 	num = ft_atof(ratio);
+// 	if (check_range && (num < 0.0f || num > 1.0f))
+// 		return (printf("%f %s should be between 0.0 and 1.0\n", num, ratio), 0);
+// 	*r = num;
+// 	return (1);
+// }
+int	parse_float_with_range(char *str, float *f, float min, float max)
 {
 	float	num;
 
-	if (!ratio || !r)
+	if (!str || !f)
 		return (printf("Input is missing\n"), 0);
-	if (!ft_isfloat(ratio))
-		return (printf("Invalid float: %s\n", ratio), 0);
-	num = ft_atof(ratio);
-	if (check_range && (num < 0.0f || num > 1.0f))
-		return (printf("%f %s should be between 0.0 and 1.0\n", num, ratio), 0);
-	*r = num;
+	if (!ft_isfloat(str))
+		return (printf("Invalid float: %s\n", str), 0);
+	num = ft_atof(str);
+	if (num < min || num > max)
+	{
+		printf("Value %.1f must be between %.1f and %.1f\n", num, min, max);
+		return (0);
+	}
+	*f = num;
 	return (1);
 }
 
@@ -60,7 +77,7 @@ int	parse_dir(char *dir, t_vec3 *vec)
 		return (0);
 	if (vec->x < -1.0f || vec->x > 1.0f || vec->y < -1.0f || vec->y > 1.0f
 		|| vec->z < -1.0f || vec->z > 1.0f)
-		return (printf("Direction must be in range [-1,1]\n"), 0);
+		return (printf("Direction must be in range -1,1\n"), 0);
 	if (vec->x == 0.0f && vec->y == 0.0f && vec->z == 0.0f)
 		return (printf("Direction vector cannot be zero\n"), 0);
 	*vec = vec_normalize(*vec);
