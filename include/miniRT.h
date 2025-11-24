@@ -6,15 +6,12 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/11/19 14:01:29 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/21 20:31:30 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-
-# define WIDTH 1280
-# define HEIGHT 720
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
@@ -26,18 +23,15 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
 
-// drawing objects and scene
-void draw_elements(t_rt *scenes);
-void object_drawing(t_rt *scenes);
-int draw_scene(t_rt *scenes);
+# define WIDTH 860
+# define HEIGHT 640
 
-// 
-char **ft_split_whitespace(char *str);
+char	**ft_split_whitespace(char *str);
+int		count_array_elements(char **arr);
 
-int validate_scene(t_rt *scene);
+void	free_scenes(t_rt *scene);
 
+int		validate_scene(t_rt *scene);
 
 #endif

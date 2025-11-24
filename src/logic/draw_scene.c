@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:45:28 by mring             #+#    #+#             */
-/*   Updated: 2025/11/19 14:16:44 by mring            ###   ########.fr       */
+/*   Updated: 2025/11/21 21:41:45 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	object_drawing(t_rt *scenes)
 	draw_elements(scenes);
 	i = 0;
 	// draw objects
-	while (i < scenes->count)
+	while (i < scenes)
 	{
 		// sphere has vec3 center, float diameter,
 		// how to place it?
@@ -62,6 +62,5 @@ int	draw_scene(t_rt *scenes)
 	// will later be an array needed to be iterated.
 	// can be multiple cy, pl, sp
 	// then apply matrix: rotation, color, etc.
-
 	return (0);
 }
