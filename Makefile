@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/24 17:23:50 by mring            ###   ########.fr        #
+#    Updated: 2025/11/25 10:55:41 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRC_FILES = main.c \
 			parsing/parsing_scene.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
-			render.c
+			logic/render.c
 
 
 # Colors for output
