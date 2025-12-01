@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/11/25 10:55:41 by mring            ###   ########.fr        #
+#    Updated: 2025/12/01 10:00:49 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,10 +93,10 @@ all: $(LIBFT) $(TARGET) banner
 
 banner:
 	@printf "\n$$BANNER\n\n"
-all: $(MLX) $(LIBFT) $(TARGET)
 
 debug: CFLAGS += $(DEBUG_FLAGS)
-debug: fclean all
+debug: fclean
+	$(MAKE) CFLAGS= all
 
 noflags: CFLAGS =
 noflags: fclean all
