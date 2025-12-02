@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:34:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/01 14:37:18 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 09:09:50 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ double	hit_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_vec3 cy_center,
 	double	t_bottom;
 	t_vec3	p_bottom;
 	t_vec3	to_center;
-	double	dist_sq;
 	t_vec3	top_center;
 	double	t_top;
 	t_vec3	p_top;
 	t_vec3	to_top_center;
-	double	dist_sq_top;
 	t_vec3	radial;
 	t_vec3	radial_top;
 

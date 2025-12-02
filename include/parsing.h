@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 16:24:29 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 09:06:26 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef struct s_rt
 	t_obj			*objects;
 }					t_rt;
 
-int					count_array_elements(char **arr);
+char				**ft_split_whitespace(char *str);
 int					parsing_scene(char *av, t_rt *scene);
 int					pars_int(char *input);
 int					parse_ratio(char *ratio, float *r, int check_range);

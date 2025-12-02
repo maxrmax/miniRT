@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/01 10:00:49 by mring            ###   ########.fr        #
+#    Updated: 2025/12/02 09:09:36 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRC_FILES = main.c \
 			math/vec3_negate.c \
 			math/vec3_new.c \
 			math/vec3_normalize.c \
-			math/vec3_print.c \
 			math/vec3_sub.c \
 			parsing/parsing.c \
 			parsing/helper_functions.c \
@@ -50,7 +49,8 @@ SRC_FILES = main.c \
 			parsing/parsing_scene.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
-			logic/render.c
+			logic/render.c \
+			debug_prints.c
 
 
 # Colors for output
