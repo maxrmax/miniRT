@@ -2,6 +2,7 @@ A 0.15 255,255,255
 
 C 0,1,5 0,-0.1,-1 70
 
+L 140,0,30          0.7                 255,255,255
 L -5,8,3 0.8
 
 # Ground plane (large metallic sphere)

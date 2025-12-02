@@ -6,12 +6,11 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:28:32 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 17:43:51 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 16:04:41 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
 
 // returns the sum of vector a and b
 // passed by value, original values are not modified

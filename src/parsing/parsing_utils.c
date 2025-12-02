@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 17:30:16 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:02:34 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ int	parse_cordinates(char *cordi, t_vec3 *vec)
 		ft_free_split(split);
 		return (printf("Coordinates must have exactly 3 values\n"), 0);
 	}
-	// if (parse_float(split[0]) || parse_float(split[1]) || parse_float(split[2]))
-	// 	return (0);
 	vec->x = ft_atof(split[0]);
 	vec->y = ft_atof(split[1]);
 	vec->z = ft_atof(split[2]);

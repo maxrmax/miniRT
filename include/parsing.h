@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/02 09:06:26 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 17:55:45 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_rt
 	t_camera		*camera;
 	t_light			*light;
 	t_obj			*objects;
+	t_obj			*shadow_obj;
+	t_obj			*hit_obj;
 }					t_rt;
 
 char				**ft_split_whitespace(char *str);

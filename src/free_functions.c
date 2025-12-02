@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 05:08:14 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/02 08:54:41 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 16:03:26 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_scenes(t_rt *scene)
 
 void	ft_free_split(char **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return ;

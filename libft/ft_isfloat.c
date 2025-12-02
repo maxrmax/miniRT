@@ -3,42 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isfloat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 05:29:01 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/11 05:29:39 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:23:51 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isfloat(char *str)
+int	ft_isfloat(char *str)
 {
-    int i;
-    int dot_count;
+	int	i;
+	int	dot_count;
 
-    if (!str || !*str)
-        return (0);
-
-    i = 0;
-    dot_count = 0;
-    if (str[i] == '+' || str[i] == '-')
-        i++;
-    if (!str[i])
-        return (0);
-
-    while (str[i])
-    {
-        if (str[i] == '.')
-        {
-            dot_count++;
-            if (dot_count > 1)
-                return (0);
-        }
-        else if (!ft_isdigit(str[i]))
-            return (0);
-        i++;
-    }
-
-    return (1);
+	if (!str || !*str)
+		return (0);
+	i = 0;
+	dot_count = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '.')
+		{
+			dot_count++;
+			if (dot_count > 1)
+				return (0);
+		}
+		else if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
