@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 18:03:52 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/03 13:36:55 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,8 @@ void	window_loop(t_rt *scene)
 {
 	mlx_t		*window;
 	mlx_image_t	*img;
-	double		viewport_x;
-	double		viewport_y;
 	uint32_t	index;
-	t_vec3		ray_origin;
-	t_vec3		ray_dir;
 	t_obj		*obj;
-	bool		hit;
-	t_vec3		forward;
-	t_vec3		right;
-	t_vec3		world_up;
-	t_vec3		up;
-	t_vec3		viewport_offset;
-	double		fov_rad;
-	double		viewport_height;
-	double		viewport_width;
-	double		t;
-	double		closest_t;
 	t_vec3		hit_point;
 	t_vec3		normal;
 	t_vec3		light_dir;
@@ -59,15 +44,16 @@ void	window_loop(t_rt *scene)
 		mlx_terminate(window);
 		exit(1);
 	}
+	pre_calc_camera(scene->camera);
 	i = 0;
 	while (i < HEIGHT)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			calc_camera();
-			obj_calc();
-			calc_pixel();
+			calc_camera(scene->camera);
+			obj_calc(scene->objects);
+			calc_pixel(scene);
 			j++;
 		}
 		i++;

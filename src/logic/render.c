@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:34:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 18:03:54 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/03 13:36:59 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,37 +150,40 @@ double	hit_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_obj *obj)
 	return (t);
 }
 
-void	pre_calc_camera(void)
+// refactor start
+void	pre_calc_camera(t_camera *camera)
 {
 	// false error, math.h is included
 	// fov calculation for our scene
-	fov_rad = scene->camera->fov * M_PI / 180.0;
+	camera->fov_rad = camera->fov * M_PI / 180.0;
 	// viewport is our screen inside the 3D space
-	viewport_height = 2.0 * tan(fov_rad / 2.0);
+	camera->viewport_height = 2.0 * tan(camera->fov_rad / 2.0);
 	// might need to adjust for resizable windows
-	viewport_width = viewport_height * ((double)WIDTH / HEIGHT);
-	forward = vec_normalize(scene->camera->dir);
+	camera->viewport_width = camera->viewport_height * ((double)WIDTH / HEIGHT);
+	camera->forward = vec_normalize(camera->dir);
 	// x (left right), y (up down), z (forward backward)
-	world_up = vec_new(0, 1, 0); // assuming +Y is up
-	right = vec_normalize(vec_cross(forward, world_up));
-	up = vec_cross(right, forward); // already normalized
+	camera->world_up = vec_new(0, 1, 0); // assuming +Y is up
+	camera->right = vec_normalize(vec_cross(camera->forward, camera->world_up));
+	// already normalized
+	camera->up = vec_cross(camera->right, camera->forward);
 }
 
-void	calc_camera(void)
+void	calc_camera(t_camera *camera)
 {
-	closest_t = INFINITY;
-	viewport_x = ((double)j / (WIDTH - 1) * 2.0 - 1.0) * (viewport_width / 2.0);
-	viewport_y = (1.0 - (double)i / (HEIGHT - 1) * 2.0) * (viewport_height
-			/ 2.0);
-	viewport_offset = vec_add(vec_mult(right, viewport_x), vec_mult(up,
-				viewport_y));
-	ray_dir = vec_normalize(vec_add(forward, viewport_offset));
+	camera->viewport_x = ((double)j / (WIDTH - 1) * 2.0 - 1.0)
+		* (camera->viewport_width / 2.0);
+	camera->viewport_y = (1.0 - (double)i / (HEIGHT - 1) * 2.0)
+		* (camera->viewport_height / 2.0);
+	camera->viewport_offset = vec_add(vec_mult(camera->right,
+				camera->viewport_x), vec_mult(camera->up, camera->viewport_y));
+	camera->ray_dir = vec_normalize(vec_add(camera->forward,
+				camera->viewport_offset));
 	index = (i * WIDTH + j) * 4;
 }
 
-void	calc_pixel(void)
+void	calc_pixel(t_rt *scene)
 {
-	if (hit)
+	if (scene->objects->hit)
 	{
 		hit_calc();
 		light_calc();
@@ -195,27 +198,30 @@ void	calc_pixel(void)
 	img->pixels[index + 3] = 255;
 }
 
-void	obj_calc(void)
+void	obj_calc(t_obj *objects)
 {
-	obj = scene->objects;
-	hit = false;
+	t_obj	*obj;
+	double	t;
+
+	obj = objects;
+	obj->hit = false;
 	while (obj)
 	{
 		t = -1.0;
 		// TODO: adjust arguments, pass entire object instead
 		// reduces clutter, keeps logic inside sub-functions
 		if (obj->type == SPHERE)
-			t = hit_sphere(ray_origin, ray_dir, obj);
+			obj->t = hit_sphere(obj->ray_origin, obj->ray_dir, obj);
 		else if (obj->type == PLANE)
-			t = hit_plane(ray_origin, ray_dir, obj);
+			obj->t = hit_plane(obj->ray_origin, obj->ray_dir, obj);
 		else if (obj->type == CYLINDER)
-			t = hit_cylinder(ray_origin, ray_dir, obj);
+			obj->t = hit_cylinder(obj->ray_origin, obj->ray_dir, obj);
 		// if t is above 0 and smaller than closest_t (iirc t was time in math)
-		if (t > 0 && t < closest_t)
+		if (obj->t > 0 && obj->t < obj->closest_t)
 		{
-			closest_t = t;
-			scene->hit_obj = obj;
-			hit = true;
+			obj->closest_t = obj->t;
+			scene->hit_obj = obj; // may can move hit_obj into t_obj
+			obj->hit = true;
 		}
 		obj = obj->next;
 	}
@@ -225,6 +231,7 @@ void	hit_calc(void)
 {
 	hit_point = vec_add(ray_origin, vec_mult(ray_dir, closest_t));
 	// Calculating surface normal based on object type
+	// obj->type == SPHERE && obj->hit == true ?
 	if (scene->hit_obj->type == SPHERE)
 		normal = vec_normalize(vec_sub(hit_point,
 					scene->hit_obj->data.sp.center));

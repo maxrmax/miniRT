@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/02 17:55:45 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/03 13:36:58 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ typedef struct s_camera
 	t_vec3			pos;
 	t_vec3			dir;
 	int				fov;
+	double			fov_rad;
+	double			viewport_height;
+	double			viewport_width;
+	t_vec3			forward;
+	t_vec3			world_up;
+	t_vec3			right;
+	t_vec3			up;
+	t_vec3			ray_dir;
+	double			viewport_x;
+	double			viewport_y;
+	t_vec3			viewport_offset;
+
 }					t_camera;
 
 typedef struct s_light
@@ -89,6 +101,12 @@ typedef struct s_obj
 	t_obj_type		type;
 	t_obj_data		data;
 	struct s_obj	*next;
+	bool			hit;
+	t_vec3			ray_origin;
+	t_vec3			ray_dir;
+	double			closest_t = INFINITY;
+	double			t;
+
 }					t_obj;
 
 typedef struct s_rt
