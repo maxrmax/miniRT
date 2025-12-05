@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/03 13:36:58 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/05 15:52:38 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_camera
 	t_vec3			world_up;
 	t_vec3			right;
 	t_vec3			up;
-	t_vec3			ray_dir;
 	double			viewport_x;
 	double			viewport_y;
 	t_vec3			viewport_offset;
@@ -71,6 +70,9 @@ typedef struct s_sp
 	t_color			color;
 	t_vec3			center;
 	float			diameter;
+	double			a;
+	double			b;
+	double			c;
 }					t_sp;
 
 typedef struct s_pl
@@ -78,6 +80,8 @@ typedef struct s_pl
 	t_vec3			point;
 	t_vec3			normal;
 	t_color			color;
+	double			denom;
+
 }					t_pl;
 
 typedef struct s_cy
@@ -87,7 +91,38 @@ typedef struct s_cy
 	float			diameter;
 	float			height;
 	t_color			color;
+	t_vec3			objcent;
+	t_vec3			ray_perp;
+	t_vec3			oc_perp;
+	double			t1;
+	double			t2;
+	double			t_bottom;
+	double			t_top;
+	double			a;
+	double			b;
+	double			c;
+	t_vec3			p1;
+	double			h1;
+	t_vec3			p2;
+	double			h2;
+	double			cap_denom;
+	t_vec3			p_bottom;
+	t_vec3			to_center;
+	t_vec3			top_center;
+	t_vec3			p_top;
+	t_vec3			to_top_center;
+	t_vec3			radial;
+	t_vec3			radial_top;
 }					t_cy;
+
+// typedef struct s_hit_record
+// {
+// 	double			t;
+// 	t_vec3			point;
+// 	t_vec3			normal;
+// 	t_obj			*obj;
+// 	bool			hit;
+// }					t_hit_record;
 
 typedef union u_obj_data
 {
@@ -102,11 +137,19 @@ typedef struct s_obj
 	t_obj_data		data;
 	struct s_obj	*next;
 	bool			hit;
-	t_vec3			ray_origin;
 	t_vec3			ray_dir;
-	double			closest_t = INFINITY;
+	double			closest_t;
 	double			t;
-
+	t_vec3			ray_origin;
+	double			diffuse;
+	double			brightness;
+	bool			in_shadow;
+	double			discriminant;
+	t_vec3 hit_point; // hit_obj
+	t_vec3 normal;    // hit_obj
+	t_vec3			light_dir;
+	double			light_dist;
+	double			shadow_t;
 }					t_obj;
 
 typedef struct s_rt
@@ -115,8 +158,10 @@ typedef struct s_rt
 	t_camera		*camera;
 	t_light			*light;
 	t_obj			*objects;
-	t_obj			*shadow_obj;
 	t_obj			*hit_obj;
+	uint32_t		index;
+	mlx_image_t		*img;
+	mlx_t			*window;
 }					t_rt;
 
 char				**ft_split_whitespace(char *str);

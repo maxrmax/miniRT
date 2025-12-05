@@ -6,62 +6,60 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/03 13:36:55 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/05 14:12:04 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+void	key_hook(mlx_key_data_t keydata, void *param)
+{
+	mlx_t	*mlx;
+
+	mlx = param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(mlx);
+}
+
 void	window_loop(t_rt *scene)
 {
-	mlx_t		*window;
-	mlx_image_t	*img;
-	uint32_t	index;
-	t_obj		*obj;
-	t_vec3		hit_point;
-	t_vec3		normal;
-	t_vec3		light_dir;
-	double		light_dist;
-	bool		in_shadow;
-	double		shadow_t;
-	double		diffuse;
-	double		brightness;
-	t_vec3		hit_to_center;
-	double		proj;
-	t_vec3		axis_point;
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	scene->hit_obj = NULL;
-	ray_origin = scene->camera->pos;
 	// calculate render size by window size
-	window = mlx_init(WIDTH, HEIGHT, "miniRT", true);
-	if (!window)
+	scene->window = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	if (!scene->window)
 		exit(1);
-	img = mlx_new_image(window, WIDTH, HEIGHT);
-	if (!img)
+	scene->img = mlx_new_image(scene->window, WIDTH, HEIGHT);
+	if (!scene->img)
 	{
-		mlx_terminate(window);
+		mlx_terminate(scene->window);
 		exit(1);
 	}
-	pre_calc_camera(scene->camera);
+	pre_calc_camera(scene);
 	i = 0;
 	while (i < HEIGHT)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			calc_camera(scene->camera);
-			obj_calc(scene->objects);
+			calc_camera(scene, i, j);
+			// -> done, no dependencies elsewhere
+			calc_objs(scene);
+			// -> hit_sphere/plane/cylinder
 			calc_pixel(scene);
+			// -> if (hit) hit_calc; light_calc; draw_pixel;
+			// else pixel black
 			j++;
 		}
 		i++;
 	}
-	mlx_image_to_window(window, img, 0, 0);
-	mlx_loop(window);
-	mlx_delete_image(window, img);
-	mlx_terminate(window);
+	// key_hook(/*idk yet*/);
+	mlx_image_to_window(scene->window, scene->img, 0, 0);
+	mlx_loop(scene->window);
+	mlx_delete_image(scene->window, scene->img);
+	mlx_terminate(scene->window);
 }
 
 int	validate_scene(t_rt *scene)

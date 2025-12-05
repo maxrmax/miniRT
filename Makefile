@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/02 09:09:36 by mring            ###   ########.fr        #
+#    Updated: 2025/12/05 14:08:27 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,10 @@ SRC_FILES = main.c \
 			parsing/parsing_scene.c \
 			parsing/ft_split_whitespace.c \
 			free_functions.c \
-			logic/render.c \
+			logic/camera_calc.c \
+			logic/obj_calc.c \
+			logic/pixel_calc.c \
+			logic/ray_calc.c \
 			debug_prints.c
 
 

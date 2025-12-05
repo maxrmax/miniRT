@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 16:21:11 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/05 14:04:45 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,23 @@
 int		validate_scene(t_rt *scene);
 void	free_scenes(t_rt *scene);
 
-//
-double	hit_sphere(t_vec3 ray_origin, t_vec3 ray_dir, t_obj *obj);
-double	hit_plane(t_vec3 ray_origin, t_vec3 ray_dir, t_obj *obj);
-double	hit_cylinder(t_vec3 ray_origin, t_vec3 ray_dir, t_obj *obj);
+// camera
+void	pre_calc_camera(t_rt *scene);
+void	calc_camera(t_rt *scene, int i, int j);
+
+// object calculations
+void	calc_objs(t_rt *scene);
+double	hit_sphere(t_obj *obj);
+double	hit_plane(t_obj *obj);
+double	hit_cylinder(t_obj *obj);
+
+// ray calculations (light, shadow)
+void	hit_calc(t_obj *obj);
+void	light_calc(t_rt *scene);
+
+// pixel calculations
+void	calc_pixel(t_rt *scene);
+void	draw_pixel(t_rt *scene);
 
 // debug
 void	print_scene(t_rt *scene);
