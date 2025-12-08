@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/05 15:52:38 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/08 12:39:54 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ typedef struct s_sp
 	t_color			color;
 	t_vec3			center;
 	float			diameter;
-	double			a;
-	double			b;
-	double			c;
 }					t_sp;
 
 typedef struct s_pl
@@ -80,7 +77,6 @@ typedef struct s_pl
 	t_vec3			point;
 	t_vec3			normal;
 	t_color			color;
-	double			denom;
 
 }					t_pl;
 
@@ -144,9 +140,9 @@ typedef struct s_obj
 	double			diffuse;
 	double			brightness;
 	bool			in_shadow;
-	double			discriminant;
-	t_vec3 hit_point; // hit_obj
-	t_vec3 normal;    // hit_obj
+	double discriminant; //
+	t_vec3 hit_point;    // hit_obj
+	t_vec3 normal;       // hit_obj
 	t_vec3			light_dir;
 	double			light_dist;
 	double			shadow_t;
