@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/05 14:12:04 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:13:15 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int ac, char **av)
 		printf("No file or to many arguments \n");
 		return (1);
 	}
-	scene = malloc(sizeof(t_rt));
+	scene = ft_calloc(1, sizeof(t_rt));
 	if (!scene)
 		return (printf("Error: malloc failed\n"), 1);
 	if (parsing_scene(av[1], scene))

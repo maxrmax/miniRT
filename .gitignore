@@ -8,3 +8,4 @@ bin/
 *.ppm
 miniRT
 .vscode
+log.log

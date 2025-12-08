@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:50:18 by mring             #+#    #+#             */
-/*   Updated: 2025/12/08 12:26:19 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/08 21:14:10 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ void	pre_calc_camera(t_rt *scene)
 // TODO: window resizing adjustment
 void	calc_camera(t_rt *scene, int i, int j)
 {
-	scene->camera->viewport_x = ((double)j / (WIDTH - 1) * 2.0 - 1.0)
+	double	viewport_x;
+	double	viewport_y;
+	t_vec3	viewport_offset;
+
+	viewport_x = ((double)j / (WIDTH - 1) * 2.0 - 1.0)
 		* (scene->camera->viewport_width / 2.0);
-	scene->camera->viewport_y = (1.0 - (double)i / (HEIGHT - 1) * 2.0)
+	viewport_y = (1.0 - (double)i / (HEIGHT - 1) * 2.0)
 		* (scene->camera->viewport_height / 2.0);
-	scene->camera->viewport_offset = vec_add(vec_mult(scene->camera->right,
-				scene->camera->viewport_x), vec_mult(scene->camera->up,
-				scene->camera->viewport_y));
+	viewport_offset = vec_add(vec_mult(scene->camera->right, viewport_x),
+			vec_mult(scene->camera->up, viewport_y));
 	scene->objects->ray_dir = vec_normalize(vec_add(scene->camera->forward,
-				scene->camera->viewport_offset));
+				viewport_offset));
 	scene->index = (i * WIDTH + j) * 4;
 }
