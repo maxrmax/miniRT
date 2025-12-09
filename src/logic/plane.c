@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.c                                             :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 17:53:44 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 17:39:41 by mring            ###   ########.fr       */
+/*   Created: 2025/12/08 12:33:41 by mring             #+#    #+#             */
+/*   Updated: 2025/12/08 12:39:36 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+// t = dot(plane_point - ray_origin, plane_normal) / dot(ray_dir, plane_normal)
+double	hit_plane(t_obj *obj)
+{
+	double	denom;
 
-
-/*
-need a brdf function for light refraction on surfaces and color calculation
-Bi-Directional Reflectance Distribution Function
-the function calculates the color the ray will have after in bounces off a surface/intersects with any object
-which can happen multiple times.
-the more rays the more calculation the more calls the slower the program -> here we can optimize with logic
-
-
-*/
+	denom = vec_dot(obj->ray_dir, obj->data.pl.normal);
+	if (fabs(denom) < 1e-6)
+		return (-1.0);
+	obj->t = vec_dot(vec_sub(obj->data.pl.point, obj->ray_origin),
+			obj->data.pl.normal) / denom;
+	if (obj->t < 0)
+		return (-1.0);
+	return (obj->t);
+}

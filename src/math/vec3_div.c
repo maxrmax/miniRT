@@ -6,13 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:10:19 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 13:54:02 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 16:04:18 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vec3 vec_div(t_vec3 v, float scalar)
+t_vec3	vec_div(t_vec3 v, float scalar)
 {
 	v.x /= scalar;
 	v.y /= scalar;

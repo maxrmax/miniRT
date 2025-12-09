@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 04:23:15 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 18:05:44 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:41:43 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,6 @@ int	parse_cordinates(char *cordi, t_vec3 *vec)
 	{
 		ft_free_split(split);
 		return (printf("Coordinates must have exactly 3 values\n"), 0);
-	}
-	if (!ft_isfloat(split[0]) || !ft_isfloat(split[1]) || !ft_isfloat(split[2]))
-	{
-		return (ft_free_split(split), printf("Invalid coordinate format\n"), 0);
 	}
 	vec->x = ft_atof(split[0]);
 	vec->y = ft_atof(split[1]);

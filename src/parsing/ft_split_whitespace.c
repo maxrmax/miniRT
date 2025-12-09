@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_whitespace.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:28:07 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/21 16:57:49 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/02 09:05:56 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-#include <stdlib.h>
 
 static int	is_ws(char c)
 {

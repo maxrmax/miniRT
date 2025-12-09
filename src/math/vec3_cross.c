@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:34:03 by mring             #+#    #+#             */
-/*   Updated: 2025/11/10 17:39:15 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 16:04:14 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 // else would overwrite still necessary results.
 t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 {
-    t_vec3 result;
-    result.x = a.y * b.z - a.z * b.y;
-    result.y = a.z * b.x - a.x * b.z;
-    result.z = a.x * b.y - a.y * b.x;
-    return (result);
+	t_vec3	result;
+
+	result.x = a.y * b.z - a.z * b.y;
+	result.y = a.z * b.x - a.x * b.z;
+	result.z = a.x * b.y - a.y * b.x;
+	return (result);
 }
 
 // crossproduct is used for camera coordinate system

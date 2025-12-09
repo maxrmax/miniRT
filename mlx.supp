@@ -1,0 +1,12 @@
+{
+   MLX42_ignore
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible,definite
+   fun:mlx_*
+}
+{
+   GLFW_ignore
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible,definite
+   fun:lglfw_*
+}

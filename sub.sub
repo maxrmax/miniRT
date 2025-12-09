@@ -1,0 +1,48 @@
+{
+   mlx42_leaks
+   Memcheck:Leak
+   ...
+   obj:*libmlx42.a*
+}
+{
+   x11_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libX11*
+}
+{
+   glfw_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libglfw*
+}
+{
+   llvm_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libLLVM*
+}
+{
+   mesa_leaks
+   Memcheck:Leak
+   ...
+   obj:*/dri/*
+}
+{
+   glibc_dl_leaks
+   Memcheck:Leak
+   ...
+   obj:*/ld-*.so*
+}
+{
+   dl_invalid_read
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+}
+{
+   dl_invalid_read2
+   Memcheck:Value8
+   fun:strncmp
+   fun:is_dst
+}

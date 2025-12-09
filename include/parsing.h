@@ -6,7 +6,7 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/01 19:13:25 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:41:09 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ typedef struct s_camera
 	t_vec3			pos;
 	t_vec3			dir;
 	int				fov;
+	double			fov_rad;
+	double			viewport_height;
+	double			viewport_width;
+	t_vec3			forward;
+	t_vec3			world_up;
+	t_vec3			right;
+	t_vec3			up;
+
 }					t_camera;
 
 typedef struct s_light
@@ -66,7 +74,15 @@ typedef struct s_pl
 	t_vec3			point;
 	t_vec3			normal;
 	t_color			color;
+
 }					t_pl;
+
+typedef struct s_cap
+{
+	t_vec3			radial;
+	double			t;
+	t_vec3			p;
+}					t_cap;
 
 typedef struct s_cy
 {
@@ -75,6 +91,18 @@ typedef struct s_cy
 	float			diameter;
 	float			height;
 	t_color			color;
+	//
+	t_vec3			objcent;
+	t_vec3			ray_perp;
+	t_vec3			oc_perp;
+	double			t1;
+	double			t2;
+	t_vec3			to_center;
+	t_vec3			top_center;
+	t_vec3			to_top_center;
+	t_cap			top;
+	t_cap			bottom;
+	double			cap_denom;
 }					t_cy;
 
 typedef union u_obj_data
@@ -89,6 +117,18 @@ typedef struct s_obj
 	t_obj_type		type;
 	t_obj_data		data;
 	struct s_obj	*next;
+	bool			hit;
+	t_vec3			ray_dir;
+	double			closest_t;
+	double t; // used calc_objs, hit_*obj*
+	t_vec3			ray_origin;
+	double			diffuse;
+	double			brightness;
+	bool			in_shadow;
+	t_vec3 hit_point; // hit_obj
+	t_vec3 normal;    // hit_obj
+	t_vec3			light_dir;
+	double			light_dist;
 }					t_obj;
 
 typedef struct s_rt
@@ -97,9 +137,13 @@ typedef struct s_rt
 	t_camera		*camera;
 	t_light			*light;
 	t_obj			*objects;
+	t_obj			*hit_obj;
+	uint32_t		index;
+	mlx_image_t		*img;
+	mlx_t			*window;
 }					t_rt;
 
-int					count_array_elements(char **arr);
+char				**ft_split_whitespace(char *str);
 int					parsing_scene(char *av, t_rt *scene);
 int					pars_int(char *input);
 int					parse_ratio(char *ratio, float *r, int check_range);

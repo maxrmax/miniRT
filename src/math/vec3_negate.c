@@ -6,13 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:01:49 by mring             #+#    #+#             */
-/*   Updated: 2025/11/11 14:02:42 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/02 16:04:38 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vec3 vec_negate(t_vec3 v)
+t_vec3	vec_negate(t_vec3 v)
 {
 	v.x = -v.x;
 	v.y = -v.y;
