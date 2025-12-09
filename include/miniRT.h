@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/12/05 14:04:45 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/09 17:56:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 //
 int		validate_scene(t_rt *scene);
 void	free_scenes(t_rt *scene);
+void	window_loop(t_rt *scene);
 
 // camera
 void	pre_calc_camera(t_rt *scene);
@@ -40,6 +41,7 @@ void	calc_objs(t_rt *scene);
 double	hit_sphere(t_obj *obj);
 double	hit_plane(t_obj *obj);
 double	hit_cylinder(t_obj *obj);
+double	cy_base(t_obj *obj);
 
 // ray calculations (light, shadow)
 void	hit_calc(t_obj *obj);

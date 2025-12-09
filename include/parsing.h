@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/09 14:41:09 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:03:58 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,8 @@ typedef struct s_cy
 	float			diameter;
 	float			height;
 	t_color			color;
-	//
-	t_vec3			objcent;
-	t_vec3			ray_perp;
-	t_vec3			oc_perp;
 	double			t1;
 	double			t2;
-	t_vec3			to_center;
-	t_vec3			top_center;
-	t_vec3			to_top_center;
-	t_cap			top;
-	t_cap			bottom;
-	double			cap_denom;
 }					t_cy;
 
 typedef union u_obj_data
@@ -120,13 +110,13 @@ typedef struct s_obj
 	bool			hit;
 	t_vec3			ray_dir;
 	double			closest_t;
-	double t; // used calc_objs, hit_*obj*
+	double			t;
 	t_vec3			ray_origin;
 	double			diffuse;
 	double			brightness;
 	bool			in_shadow;
-	t_vec3 hit_point; // hit_obj
-	t_vec3 normal;    // hit_obj
+	t_vec3			hit_point;
+	t_vec3			normal;
 	t_vec3			light_dir;
 	double			light_dist;
 }					t_obj;
@@ -143,6 +133,7 @@ typedef struct s_rt
 	mlx_t			*window;
 }					t_rt;
 
+int					parse_float_with_range(char *str, float *f, float min, float max);
 char				**ft_split_whitespace(char *str);
 int					parsing_scene(char *av, t_rt *scene);
 int					pars_int(char *input);
