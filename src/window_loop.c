@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   window_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:54:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 17:57:19 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/09 18:20:18 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void resize_hook(int32_t width, int32_t height, void *param)
+{
+    t_rt *scene = param;
+
+    mlx_set_window_size(scene->window, width, height);
+
+    // Resize image buffer
+    mlx_resize_image(scene->img, width, height);
+
+    // Re-render scene into resized buffer
+    pre_calc_camera(scene); // recalc rays for new size
+    render_scene(scene);
+
+    // re-display the image (optional, depending on MLX42 behavior)
+    mlx_image_to_window(scene->window, scene->img, 0, 0);
+}
+
 
 static void	key_hook(mlx_key_data_t keydata, void *param)
 {
@@ -28,23 +46,15 @@ static void	render_pixel(t_rt *scene, int i, int j)
 	calc_pixel(scene);
 }
 
-static void	render_scene(t_rt *scene)
+void render_scene(t_rt *scene)
 {
-	int	i;
-	int	j;
+    uint32_t i, j;
 
-	i = 0;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			render_pixel(scene, i, j);
-			j++;
-		}
-		i++;
-	}
+    for (i = 0; i < scene->img->height; i++)
+        for (j = 0; j < scene->img->width; j++)
+            render_pixel(scene, i, j);
 }
+
 
 static void	init_window(t_rt *scene)
 {
@@ -67,6 +77,7 @@ void	window_loop(t_rt *scene)
 	render_scene(scene);
 	mlx_image_to_window(scene->window, scene->img, 0, 0);
 	mlx_key_hook(scene->window, key_hook, scene->window);
+	mlx_resize_hook(scene->window, resize_hook, scene);
 	mlx_loop(scene->window);
 	mlx_delete_image(scene->window, scene->img);
 	mlx_terminate(scene->window);
