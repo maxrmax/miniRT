@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/09 17:17:28 by mring            ###   ########.fr        #
+#    Updated: 2025/12/09 17:55:34 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
 SRC_FILES = main.c \
+			window_loop.c \
 			math/vec3_add.c \
 			math/vec3_cross.c \
 			math/vec3_div.c \
@@ -53,6 +54,7 @@ SRC_FILES = main.c \
 			logic/obj_calc.c \
 			logic/pixel_calc.c \
 			logic/hit_calc.c \
+			logic/light_calc.c \
 			logic/sphere.c \
 			logic/plane.c \
 			logic/cylinder_main.c \

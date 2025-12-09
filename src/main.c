@@ -6,61 +6,11 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/08 21:13:15 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/09 17:58:20 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-void	key_hook(mlx_key_data_t keydata, void *param)
-{
-	mlx_t	*mlx;
-
-	mlx = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(mlx);
-}
-
-void	window_loop(t_rt *scene)
-{
-	int	i;
-	int	j;
-
-	scene->hit_obj = NULL;
-	// calculate render size by window size
-	scene->window = mlx_init(WIDTH, HEIGHT, "miniRT", true);
-	if (!scene->window)
-		exit(1);
-	scene->img = mlx_new_image(scene->window, WIDTH, HEIGHT);
-	if (!scene->img)
-	{
-		mlx_terminate(scene->window);
-		exit(1);
-	}
-	pre_calc_camera(scene);
-	i = 0;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			calc_camera(scene, i, j);
-			// -> done, no dependencies elsewhere
-			calc_objs(scene);
-			// -> hit_sphere/plane/cylinder
-			calc_pixel(scene);
-			// -> if (hit) hit_calc; light_calc; draw_pixel;
-			// else pixel black
-			j++;
-		}
-		i++;
-	}
-	// key_hook(/*idk yet*/);
-	mlx_image_to_window(scene->window, scene->img, 0, 0);
-	mlx_loop(scene->window);
-	mlx_delete_image(scene->window, scene->img);
-	mlx_terminate(scene->window);
-}
 
 int	validate_scene(t_rt *scene)
 {

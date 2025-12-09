@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 17:16:15 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/09 17:56:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 //
 int		validate_scene(t_rt *scene);
 void	free_scenes(t_rt *scene);
+void	window_loop(t_rt *scene);
 
 // camera
 void	pre_calc_camera(t_rt *scene);
