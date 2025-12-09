@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/08 12:35:05 by mring            ###   ########.fr        #
+#    Updated: 2025/12/09 17:17:28 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,11 @@ SRC_FILES = main.c \
 			logic/camera_calc.c \
 			logic/obj_calc.c \
 			logic/pixel_calc.c \
-			logic/ray_calc.c \
+			logic/hit_calc.c \
 			logic/sphere.c \
 			logic/plane.c \
-			logic/cylinder.c \
+			logic/cylinder_main.c \
+			logic/cylinder_calc.c \
 			debug_prints.c
 
 

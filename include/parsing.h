@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/08 21:24:43 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/09 17:23:44 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,8 @@ typedef struct s_cy
 	float			diameter;
 	float			height;
 	t_color			color;
-	//
-	t_vec3			objcent;
-	t_vec3			ray_perp;
-	t_vec3			oc_perp;
 	double			t1;
 	double			t2;
-	t_vec3			to_center;
-	t_vec3			top_center;
-	t_vec3			to_top_center;
-	t_cap			top;
-	t_cap			bottom;
-	double			cap_denom;
 }					t_cy;
 
 typedef union u_obj_data
@@ -120,13 +110,13 @@ typedef struct s_obj
 	bool			hit;
 	t_vec3			ray_dir;
 	double			closest_t;
-	double t; // used calc_objs, hit_*obj*
+	double			t;
 	t_vec3			ray_origin;
 	double			diffuse;
 	double			brightness;
 	bool			in_shadow;
-	t_vec3 hit_point; // hit_obj
-	t_vec3 normal;    // hit_obj
+	t_vec3			hit_point;
+	t_vec3			normal;
 	t_vec3			light_dir;
 	double			light_dist;
 }					t_obj;
