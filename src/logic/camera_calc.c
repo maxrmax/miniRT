@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_calc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:50:18 by mring             #+#    #+#             */
-/*   Updated: 2025/12/08 21:14:10 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/10 15:51:45 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	pre_calc_camera(t_rt *scene)
 	scene->camera->fov_rad = scene->camera->fov * M_PI / 180.0;
 	// viewport is our screen inside the 3D space
 	scene->camera->viewport_height = 2.0 * tan(scene->camera->fov_rad / 2.0);
-	// might need to adjust for resizable windows
+	// Use actual image dimensions instead of constants
 	scene->camera->viewport_width = scene->camera->viewport_height
-		* ((double)WIDTH / HEIGHT);
+		* ((double)scene->img->width / scene->img->height);
 	scene->camera->forward = vec_normalize(scene->camera->dir);
 	// x (left right), y (up down), z (forward backward)
 	scene->camera->world_up = vec_new(0, 1, 0); // assuming +Y is up
@@ -40,13 +40,15 @@ void	calc_camera(t_rt *scene, int i, int j)
 	double	viewport_y;
 	t_vec3	viewport_offset;
 
-	viewport_x = ((double)j / (WIDTH - 1) * 2.0 - 1.0)
+	// Use actual image dimensions
+	viewport_x = ((double)j / (scene->img->width - 1) * 2.0 - 1.0)
 		* (scene->camera->viewport_width / 2.0);
-	viewport_y = (1.0 - (double)i / (HEIGHT - 1) * 2.0)
+	viewport_y = (1.0 - (double)i / (scene->img->height - 1) * 2.0)
 		* (scene->camera->viewport_height / 2.0);
 	viewport_offset = vec_add(vec_mult(scene->camera->right, viewport_x),
 			vec_mult(scene->camera->up, viewport_y));
 	scene->objects->ray_dir = vec_normalize(vec_add(scene->camera->forward,
 				viewport_offset));
-	scene->index = (i * WIDTH + j) * 4;
+	// Use actual image width for index calculation
+	scene->index = (i * scene->img->width + j) * 4;
 }

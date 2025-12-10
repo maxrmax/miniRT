@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:54:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 18:20:18 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:49:01 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,28 @@ void resize_hook(int32_t width, int32_t height, void *param)
 {
     t_rt *scene = param;
 
-    mlx_set_window_size(scene->window, width, height);
+    // Ensure valid dimensions
+    if (width <= 0 || height <= 0)
+        return;
 
-    // Resize image buffer
-    mlx_resize_image(scene->img, width, height);
+    // Delete old image completely
+    mlx_delete_image(scene->window, scene->img);
 
-    // Re-render scene into resized buffer
-    pre_calc_camera(scene); // recalc rays for new size
+    // Create new image with new dimensions
+    scene->img = mlx_new_image(scene->window, width, height);
+    if (!scene->img)
+    {
+        mlx_terminate(scene->window);
+        exit(1);
+    }
+
+    // Re-calculate camera for new dimensions
+    pre_calc_camera(scene);
+    
+    // Render scene into new buffer
     render_scene(scene);
 
-    // re-display the image (optional, depending on MLX42 behavior)
+    // Display the new image at position (0, 0)
     mlx_image_to_window(scene->window, scene->img, 0, 0);
 }
 
