@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 18:01:06 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:08:05 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int ac, char **av)
 		return (printf("Error: malloc failed\n"), 1);
 	if (parsing_scene(av[1], scene))
 		return (free_scenes(scene), 1);
-	print_scene(scene); // debug
+	// print_scene(scene); // debug
 	if (validate_scene(scene))
 		window_loop(scene);
 	free_scenes(scene);
