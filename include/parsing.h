@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/09 18:03:58 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:01:15 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ typedef struct s_rt
 	uint32_t		index;
 	mlx_image_t		*img;
 	mlx_t			*window;
+	int32_t     pending_width;
+    int32_t     pending_height;
+    bool        needs_resize;
 }					t_rt;
 
 int					parse_float_with_range(char *str, float *f, float min, float max);
