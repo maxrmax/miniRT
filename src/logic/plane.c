@@ -6,13 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:33:41 by mring             #+#    #+#             */
-/*   Updated: 2025/12/08 12:39:36 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:55:49 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-// t = dot(plane_point - ray_origin, plane_normal) / dot(ray_dir, plane_normal)
+// calculate the ray intersections with a plane
 double	hit_plane(t_obj *obj)
 {
 	double	denom;

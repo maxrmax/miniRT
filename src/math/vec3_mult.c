@@ -6,13 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:39:45 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 16:04:32 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:50:02 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-// scale vector v by number k
+// scale vector v by scalar
 t_vec3	vec_mult(t_vec3 v, float scalar)
 {
 	v.x *= scalar;

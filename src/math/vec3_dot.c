@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:44:07 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 16:04:22 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:53:30 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 // same direction = big positive
 // perpendicular = zero (will meet at a single point 90degree)
 // opposite direction = negative
+
+// TODO: description
 float	vec_dot(t_vec3 a, t_vec3 b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);

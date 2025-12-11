@@ -9,8 +9,4 @@ bin/
 miniRT
 .vscode
 log.log
-/build/
-/CMakeFiles/
-/*.ninja
-compile_commands.json
 

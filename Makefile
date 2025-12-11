@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/11 09:32:25 by mring            ###   ########.fr        #
+#    Updated: 2025/12/11 09:40:33 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ SRC_FILES = main.c \
 			logic/light_calc.c \
 			logic/camera_calc.c \
 			logic/cylinder_main.c \
-			logic/cylinder_calc.c \
-			debug_prints.c
+			logic/cylinder_calc.c
 
 
 # Colors for output

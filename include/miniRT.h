@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:02:27 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:46:52 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	window_loop(t_rt *scene);
 void	render_scene(t_rt *scene);
 void	resize_hook(int32_t width, int32_t height, void *param);
 void	key_hook(mlx_key_data_t keydata, void *param);
+void	loop_hook(void *param);
 
 // camera
 void	pre_calc_camera(t_rt *scene);
@@ -53,8 +54,5 @@ void	light_calc(t_rt *scene);
 // pixel calculations
 void	calc_pixel(t_rt *scene);
 void	draw_pixel(t_rt *scene);
-
-// debug
-void	print_scene(t_rt *scene);
 
 #endif

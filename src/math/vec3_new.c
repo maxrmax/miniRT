@@ -6,12 +6,13 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:00:40 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 16:04:45 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:49:03 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+// creates a new vector from the given input
 t_vec3	vec_new(float x, float y, float z)
 {
 	t_vec3	new_vec;

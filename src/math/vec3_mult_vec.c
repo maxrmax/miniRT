@@ -6,12 +6,14 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:02:49 by mring             #+#    #+#             */
-/*   Updated: 2025/12/02 16:04:35 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:50:58 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+// multiplicates vector a with vector b
+// returns a new vector
 t_vec3	vec_mult_vec(t_vec3 a, t_vec3 b)
 {
 	a.x *= b.x;
