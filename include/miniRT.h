@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 15:11:42 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 18:20:31 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:02:27 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 int		validate_scene(t_rt *scene);
 void	free_scenes(t_rt *scene);
 void	window_loop(t_rt *scene);
-void render_scene(t_rt *scene);
+void	render_scene(t_rt *scene);
+void	resize_hook(int32_t width, int32_t height, void *param);
+void	key_hook(mlx_key_data_t keydata, void *param);
 
 // camera
 void	pre_calc_camera(t_rt *scene);

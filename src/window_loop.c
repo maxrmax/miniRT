@@ -6,51 +6,32 @@
 /*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:54:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/10 16:36:28 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:06:22 by jpflegha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void resize_hook(int32_t width, int32_t height, void *param)
+void	loop_hook(void *param)
 {
-    t_rt *scene = param;
+	t_rt	*scene;
 
-    if (width <= 0 || height <= 0)
-        return;
-    scene->pending_width = width;
-    scene->pending_height = height;
-    scene->needs_resize = true;
-}
-void loop_hook(void *param)
-{
-    t_rt *scene = param;
-    
-    if (scene->needs_resize)
-    {
-        scene->needs_resize = false;
-        mlx_delete_image(scene->window, scene->img);     
-        scene->img = mlx_new_image(scene->window, 
-                                   scene->pending_width, 
-                                   scene->pending_height);
-        if (!scene->img)
-        {
-            mlx_terminate(scene->window);
-            exit(1);
-        }
-        pre_calc_camera(scene);
-        render_scene(scene);
-        mlx_image_to_window(scene->window, scene->img, 0, 0);
-    }
-}
-
-static void	key_hook(mlx_key_data_t keydata, void *param)
-{
-	mlx_t	*mlx;
-
-	mlx = param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(mlx);
+	scene = param;
+	if (scene->needs_resize)
+	{
+		scene->needs_resize = false;
+		mlx_delete_image(scene->window, scene->img);
+		scene->img = mlx_new_image(scene->window, scene->pending_width,
+				scene->pending_height);
+		if (!scene->img)
+		{
+			mlx_terminate(scene->window);
+			exit(1);
+		}
+		pre_calc_camera(scene);
+		render_scene(scene);
+		mlx_image_to_window(scene->window, scene->img, 0, 0);
+	}
 }
 
 static void	render_pixel(t_rt *scene, int i, int j)
@@ -60,15 +41,24 @@ static void	render_pixel(t_rt *scene, int i, int j)
 	calc_pixel(scene);
 }
 
-void render_scene(t_rt *scene)
+void	render_scene(t_rt *scene)
 {
-    uint32_t i, j;
+	uint32_t	i;
+	uint32_t	j;
 
-    for (i = 0; i < scene->img->height; i++)
-        for (j = 0; j < scene->img->width; j++)
-            render_pixel(scene, i, j);
+	i = 0;
+	j = 0;
+	while (i < scene->img->height)
+	{
+		while (j < scene->img->width)
+		{
+			render_pixel(scene, i, j);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }
-
 
 static void	init_window(t_rt *scene)
 {
@@ -83,27 +73,20 @@ static void	init_window(t_rt *scene)
 	}
 }
 
-void window_loop(t_rt *scene)
+void	window_loop(t_rt *scene)
 {
-    scene->hit_obj = NULL;
-    
-    // Initialize resize fields
-    scene->needs_resize = false;
-    scene->pending_width = WIDTH;
-    scene->pending_height = HEIGHT;
-    
-    init_window(scene);
-    pre_calc_camera(scene);
-    render_scene(scene);
-    mlx_image_to_window(scene->window, scene->img, 0, 0);
-    
-    mlx_key_hook(scene->window, key_hook, scene->window);
-    mlx_resize_hook(scene->window, resize_hook, scene);
-    
-    // Add the loop hook - this runs every frame
-    mlx_loop_hook(scene->window, loop_hook, scene);
-    
-    mlx_loop(scene->window);
-    mlx_delete_image(scene->window, scene->img);
-    mlx_terminate(scene->window);
+	scene->hit_obj = NULL;
+	scene->needs_resize = false;
+	scene->pending_width = WIDTH;
+	scene->pending_height = HEIGHT;
+	init_window(scene);
+	pre_calc_camera(scene);
+	render_scene(scene);
+	mlx_image_to_window(scene->window, scene->img, 0, 0);
+	mlx_key_hook(scene->window, key_hook, scene->window);
+	mlx_resize_hook(scene->window, resize_hook, scene);
+	mlx_loop_hook(scene->window, loop_hook, scene);
+	mlx_loop(scene->window);
+	mlx_delete_image(scene->window, scene->img);
+	mlx_terminate(scene->window);
 }
