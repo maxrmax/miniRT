@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/09 17:55:34 by mring            ###   ########.fr        #
+#    Updated: 2025/12/11 09:13:37 by jpflegha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
 SRC_FILES = main.c \
 			window_loop.c \
+			mlx_functions.c \
 			math/vec3_add.c \
 			math/vec3_cross.c \
 			math/vec3_div.c \
