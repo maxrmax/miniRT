@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:54:10 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:36:47 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:58:49 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_vec3		vec_div(t_vec3 v, float scalar);
 float		vec_dot(t_vec3 a, t_vec3 b);
 t_vec3		vec_cross(t_vec3 a, t_vec3 b);
 float		vec_length(t_vec3 v);
-float		vec_length_squared(t_vec3 v);
 t_vec3		vec_normalize(t_vec3 v);
 
 #endif
