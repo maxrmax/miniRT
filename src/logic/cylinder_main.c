@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:33:03 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 17:20:29 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:34:51 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ double	cy_base(t_obj *obj)
 	t_vec3	ray_perp;
 	t_vec3	oc_perp;
 
-	// Vector from ray origin to cylinder base
 	objcent = vec_sub(obj->ray_origin, obj->data.cy.center);
-	// Project ray direction and oc onto plane perpendicular to cylinder axis
 	ray_perp = calc_ray_perp(obj);
 	oc_perp = calc_oc_perp(obj, objcent);
 	discriminant = calc_disc(ray_perp, oc_perp, obj->data.cy.diameter / 2.0);

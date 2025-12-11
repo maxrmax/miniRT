@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   window_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:54:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:06:22 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:32:34 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-void	loop_hook(void *param)
-{
-	t_rt	*scene;
-
-	scene = param;
-	if (scene->needs_resize)
-	{
-		scene->needs_resize = false;
-		mlx_delete_image(scene->window, scene->img);
-		scene->img = mlx_new_image(scene->window, scene->pending_width,
-				scene->pending_height);
-		if (!scene->img)
-		{
-			mlx_terminate(scene->window);
-			exit(1);
-		}
-		pre_calc_camera(scene);
-		render_scene(scene);
-		mlx_image_to_window(scene->window, scene->img, 0, 0);
-	}
-}
 
 static void	render_pixel(t_rt *scene, int i, int j)
 {

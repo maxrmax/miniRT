@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:22:09 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/11/24 17:54:24 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:35:12 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pars_int(char *input)
 	return (1);
 }
 
-int	parse_float(char *str, float *f)//maybe not needed
+int	parse_float(char *str, float *f)
 {
 	float	num;
 

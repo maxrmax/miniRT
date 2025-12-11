@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/10 16:01:15 by jpflegha         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:36:59 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,13 @@ typedef struct s_rt
 	uint32_t		index;
 	mlx_image_t		*img;
 	mlx_t			*window;
-	int32_t     pending_width;
-    int32_t     pending_height;
-    bool        needs_resize;
+	int32_t			pending_width;
+	int32_t			pending_height;
+	bool			needs_resize;
 }					t_rt;
 
-int					parse_float_with_range(char *str, float *f, float min, float max);
+int					parse_float_with_range(char *str, float *f, float min,
+						float max);
 char				**ft_split_whitespace(char *str);
 int					parsing_scene(char *av, t_rt *scene);
 int					pars_int(char *input);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jpflegha <jpflegha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/11 09:13:37 by jpflegha         ###   ########.fr        #
+#    Updated: 2025/12/11 09:32:25 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,34 +30,34 @@ SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRC:.c=.o))
 
 SRC_FILES = main.c \
+			hooks.c \
 			window_loop.c \
-			mlx_functions.c \
-			math/vec3_add.c \
-			math/vec3_cross.c \
-			math/vec3_div.c \
-			math/vec3_dot.c \
-			math/vec3_length.c \
-			math/vec3_mult_vec.c \
-			math/vec3_mult.c \
-			math/vec3_negate.c \
-			math/vec3_new.c \
-			math/vec3_normalize.c \
-			math/vec3_sub.c \
-			parsing/parsing.c \
-			parsing/helper_functions.c \
-			parsing/parsing_utils.c \
+			free_functions.c \
 			parsing/init.c \
+			parsing/parsing.c \
 			parsing/parsing_obj.c \
 			parsing/parsing_scene.c \
+			parsing/parsing_utils.c \
+			parsing/helper_functions.c \
 			parsing/ft_split_whitespace.c \
-			free_functions.c \
-			logic/camera_calc.c \
-			logic/obj_calc.c \
-			logic/pixel_calc.c \
-			logic/hit_calc.c \
-			logic/light_calc.c \
-			logic/sphere.c \
+			math/vec3_sub.c \
+			math/vec3_add.c \
+			math/vec3_div.c \
+			math/vec3_dot.c \
+			math/vec3_new.c \
+			math/vec3_mult.c \
+			math/vec3_cross.c \
+			math/vec3_length.c \
+			math/vec3_negate.c \
+			math/vec3_mult_vec.c \
+			math/vec3_normalize.c \
 			logic/plane.c \
+			logic/sphere.c \
+			logic/obj_calc.c \
+			logic/hit_calc.c \
+			logic/pixel_calc.c \
+			logic/light_calc.c \
+			logic/camera_calc.c \
 			logic/cylinder_main.c \
 			logic/cylinder_calc.c \
 			debug_prints.c

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:06:41 by mring             #+#    #+#             */
-/*   Updated: 2025/12/09 17:32:39 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/11 09:34:44 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	hit_calc(t_obj *obj)
 					obj->data.sp.center));
 	else if (obj->type == PLANE)
 		obj->normal = obj->data.pl.normal;
-	// cylinders are a bitch
 	else if (obj->type == CYLINDER)
 		calc_cylinder_normal(obj);
 }
