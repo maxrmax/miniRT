@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:54:36 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:47:00 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:08:07 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	init_window(t_rt *scene)
 
 void	window_loop(t_rt *scene)
 {
-	scene->hit_obj = NULL;
 	scene->needs_resize = false;
 	scene->pending_width = WIDTH;
 	scene->pending_height = HEIGHT;

@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 09:00:51 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/11 09:32:39 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/18 17:11:22 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	loop_hook(void *param)
 	if (scene->needs_resize)
 	{
 		scene->needs_resize = false;
-		mlx_delete_image(scene->window, scene->img);
-		scene->img = mlx_new_image(scene->window, scene->pending_width,
-				scene->pending_height);
-		if (!scene->img)
+		if (!mlx_resize_image(scene->img, scene->pending_width,
+				scene->pending_height))
 		{
 			mlx_terminate(scene->window);
 			exit(1);
