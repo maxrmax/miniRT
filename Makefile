@@ -6,7 +6,7 @@
 #    By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 15:10:54 by mring             #+#    #+#              #
-#    Updated: 2025/12/11 09:40:33 by mring            ###   ########.fr        #
+#    Updated: 2025/12/22 16:55:55 by mring            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,10 +98,17 @@ export BANNER
 #                     TARGETS                     #
 # ─────────────────────────────────────────────── #
 
-all: $(LIBFT) $(TARGET) banner
+all: submodule_check $(LIBFT) $(TARGET) banner
 
 banner:
 	@printf "\n$$BANNER\n\n"
+
+submodule_check:
+	@if [ ! -f "$(MLX_DIR)/CMakeLists.txt" ] || [ ! -f "$(LIBFT_DIR)/Makefile" ]; then \
+		printf "$(CYAN)Initializing submodules...$(RESET)\n"; \
+		git submodule update --init --recursive; \
+		printf "$(GREEN)Submodules initialized!$(RESET)\n"; \
+	fi
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: fclean
