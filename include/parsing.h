@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:57:58 by jpflegha          #+#    #+#             */
-/*   Updated: 2025/12/11 09:36:59 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/22 16:39:04 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_obj_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	NONE
 }					t_obj_type;
 
 typedef struct s_color
@@ -141,7 +142,6 @@ int					parse_float_with_range(char *str, float *f, float min,
 char				**ft_split_whitespace(char *str);
 int					parsing_scene(char *av, t_rt *scene);
 int					pars_int(char *input);
-int					parse_ratio(char *ratio, float *r, int check_range);
 int					parse_field_of_view(char *fov_str, t_camera *camera);
 int					parse_dir(char *dir, t_vec3 *vec);
 int					parse_color(char *color, t_color *rgb);

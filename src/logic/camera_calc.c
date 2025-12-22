@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:50:18 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:34:37 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/22 16:28:04 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	pre_calc_camera(t_rt *scene)
 	scene->camera->viewport_width = scene->camera->viewport_height
 		* ((double)scene->img->width / scene->img->height);
 	scene->camera->forward = vec_normalize(scene->camera->dir);
-	scene->camera->world_up = vec_new(0, 1, 0);
+	if (fabs(scene->camera->forward.y) > 0.999)
+		scene->camera->world_up = vec_new(0, 0, 1);
+	else
+		scene->camera->world_up = vec_new(0, 1, 0);
 	scene->camera->right = vec_normalize(vec_cross(scene->camera->forward,
 				scene->camera->world_up));
 	scene->camera->up = vec_cross(scene->camera->right, scene->camera->forward);

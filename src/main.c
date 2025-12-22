@@ -6,7 +6,7 @@
 /*   By: mring <mring@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 12:21:17 by mring             #+#    #+#             */
-/*   Updated: 2025/12/11 09:35:37 by mring            ###   ########.fr       */
+/*   Updated: 2025/12/22 16:38:48 by mring            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ int	validate_scene(t_rt *scene)
 		i = printf("Error: Missing camera\n");
 	if (!scene->light)
 		i = printf("Error: Missing light\n");
+	if (!scene->objects)
+	{
+		scene->objects = malloc(sizeof(t_obj));
+		if (!scene->objects)
+		{
+			printf("Malloc faild\n");
+			free_scenes(scene);
+			return (0);
+		}
+		scene->objects->type = NONE;
+		ft_memset(&scene->objects->data, 0, sizeof(scene->objects->data));
+		scene->objects->next = NULL;
+	}
 	if (i > 0)
 		return (0);
 	return (1);
